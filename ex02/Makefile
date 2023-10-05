@@ -9,12 +9,12 @@ OBJ_PATH := obj
 SRC_PATH := src
 
 # compile macros
-TARGET_NAME := phone
+TARGET_NAME := account
 
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH),main.cpp)
+SRC := $(foreach x, $(SRC_PATH), Account.cpp tests.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # clean files list
