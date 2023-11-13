@@ -1,6 +1,6 @@
 # tool macros
 CXX := c++
-CXXFLAGS := $(DFLAGS) -I./include -std=c++98
+CXXFLAGS := -I./include/ -Wall -Werror -Wextra -std=c++98 $(DFLAGS)
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
@@ -14,7 +14,7 @@ TARGET_NAME := megaphone
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp megaphone.cpp)
+SRC := $(foreach x, $(SRC_PATH),  main.cpp megaphone.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # clean files list
@@ -31,22 +31,34 @@ re:	fclean all
 
 # non-phony targets
 $(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+	@echo -n "${BLUE}"
+	@$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
+	@echo -n "${GREEN}"
 	$(CXX) $(CCOBJFLAGS) -o $@ $<
 
 # phony rules
 .PHONY: makedir
 makedir:
+	@echo -n "${CYAN}"
 	@mkdir -p $(BIN_PATH) $(OBJ_PATH)
-
-.PHONY: clean
-clean:
-	@echo CLEAN $(CLEAN_LIST)
-	@rm -f $(CLEAN_LIST)
 
 .PHONY: fclean
 fclean:
-	@echo CLEAN $(CLEAN_LIST)
-	@rm -f $(DISTCLEAN_LIST)
+	@echo -n "${YELLOW}"
+	rm -f $(CLEAN_LIST)
+
+.PHONY: clean
+clean:
+	@echo -n "${YELLOW}"
+	rm -f $(DISTCLEAN_LIST)
+
+# COLORS
+export GREEN = \033[1;32m
+export RED = \033[0;31m
+export BEIGE = \033[1;33m
+export YELLOW = \033[0;33m
+export BLUE = \033[1;34m
+export CYAN = \033[1;36m
+export NC = \033[0m
