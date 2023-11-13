@@ -6,7 +6,7 @@ CCOBJFLAGS := $(CXXFLAGS) -c
 # path macros
 BIN_PATH := ./
 OBJ_PATH := obj
-SRC_PATH := src
+SRC_PATH := ./
 
 # compile macros
 TARGET_NAME := megaphone

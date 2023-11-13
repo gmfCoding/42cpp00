@@ -1,12 +1,12 @@
 # tool macros
 CXX := c++
-CXXFLAGS := -I./include/  -std=c++98 $(DFLAGS)
+CXXFLAGS := -I./include/ -Wall -Werror -Wextra -std=c++98 $(DFLAGS)
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
-BIN_PATH := .
+BIN_PATH := ./
 OBJ_PATH := obj
-SRC_PATH := src
+SRC_PATH := ./
 
 # compile macros
 TARGET_NAME := account
