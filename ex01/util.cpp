@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-void print_rowcol(std::string before, std::string str, std::string after = "", int width = 10)
+void print_rowcol(std::string before, std::string str, std::string after = "", uint width = 10)
 {
 	if (str.length() > width)
 	{
@@ -14,7 +14,13 @@ void print_rowcol(std::string before, std::string str, std::string after = "", i
 std::string Prompt(std::string prompt = "")
 {
 	std::string str;
-	std::cout << prompt;
-	getline(std::cin, str);
+	while (str.empty())
+	{
+		std::cout << prompt;
+		getline(std::cin, str);
+		if (!str.empty())
+			return (str);
+		std::cout << "Field cannot be empty!" << std::endl;
+	}
 	return (str);
 }

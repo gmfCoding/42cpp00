@@ -31,28 +31,32 @@ re:	fclean all
 
 # non-phony targets
 $(TARGET): $(OBJ)
-	@echo -n "${BLUE}"
-	@$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+	-@printf "${BLUE}"
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
-	@echo -n "${GREEN}"
+	-@printf "${GREEN}"
 	$(CXX) $(CCOBJFLAGS) -o $@ $<
 
 # phony rules
 .PHONY: makedir
 makedir:
-	@echo -n "${CYAN}"
+	-@printf "${CYAN}"
 	@mkdir -p $(BIN_PATH) $(OBJ_PATH)
 
 .PHONY: fclean
-fclean:
-	@echo -n "${YELLOW}"
-	rm -f $(CLEAN_LIST)
+fclean: clean
+	-@printf "${RED}"
+	rm -f $(TARGET_NAME)
 
 .PHONY: clean
 clean:
-	@echo -n "${YELLOW}"
+	-@printf "${YELLOW}"
 	rm -f $(DISTCLEAN_LIST)
+
+test:
+	-@printf "${CYAN}"
+	@echo yo
 
 # COLORS
 export GREEN = \033[1;32m

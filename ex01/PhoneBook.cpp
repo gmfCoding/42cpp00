@@ -85,7 +85,6 @@ void PhoneBook::PromptSearch()
 	std::cout << "Secret:\t\t" << contacts[index - 1].GetSecret() << std::endl;
 }
 
-
 void PhoneBook::PromptAdd()
 {
 	std::cout << "ADDING..." << std::endl;
