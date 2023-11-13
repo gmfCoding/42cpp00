@@ -26,7 +26,7 @@ void	Account::_displayTimestamp( void )
 void Account::displayAccountsInfos()
 {
 	_displayTimestamp();
-	cout << "accounts:"; << _nbAccounts;
+	cout << "accounts:" << _nbAccounts;
 	cout << ";total:" << _totalAmount;
 	cout << ";deposits:" << _totalNbDeposits;
 	cout << ";withdrawals:" << _totalNbWithdrawals;
@@ -103,7 +103,7 @@ int		Account::checkAmount( void ) const
 void	Account::displayStatus( void ) const
 {
 	_displayTimestamp();
-	coit << "index:" << _accountIndex;
+	cout << "index:" << _accountIndex;
 	cout << ";amount:" << _amount;
 	cout << ";deposits:" << _nbDeposits;
 	cout << ";withdrawals:" << _nbWithdrawals;

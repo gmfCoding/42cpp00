@@ -1,9 +1,10 @@
 # tool macros
 CXX := c++
-CXXFLAGS := -I./include/ -Wall -Werror -Wextra -std=c++98 $(DFLAGS)
+CXXFLAGS := $(INC_PATH) -Wall -Werror -Wextra -std=c++98 $(DFLAGS)
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
+INC_PATH := ./
 BIN_PATH := ./
 OBJ_PATH := obj
 SRC_PATH := ./
@@ -45,9 +46,9 @@ makedir:
 	@mkdir -p $(BIN_PATH) $(OBJ_PATH)
 
 .PHONY: fclean
-fclean:
-	-@printf "${YELLOW}"
-	rm -f $(CLEAN_LIST)
+fclean: clean
+	-@printf "${RED}"
+	rm -f $(TARGET_NAME)
 
 .PHONY: clean
 clean:

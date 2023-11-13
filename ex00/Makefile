@@ -1,9 +1,10 @@
 # tool macros
 CXX := c++
-CXXFLAGS := -I./include/ -Wall -Werror -Wextra -std=c++98 $(DFLAGS)
+CXXFLAGS := $(INC_PATH) -Wall -Werror -Wextra -std=c++98 $(DFLAGS)
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
+INC_PATH := ./
 BIN_PATH := ./
 OBJ_PATH := obj
 SRC_PATH := ./
@@ -53,10 +54,6 @@ fclean: clean
 clean:
 	-@printf "${YELLOW}"
 	rm -f $(DISTCLEAN_LIST)
-
-test:
-	-@printf "${CYAN}"
-	@echo yo
 
 # COLORS
 export GREEN = \033[1;32m
