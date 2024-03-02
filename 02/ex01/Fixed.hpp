@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/02 19:00:29 by clovell           #+#    #+#             */
+/*   Updated: 2024/03/02 19:02:55 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#ifndef FIXED_HPP
+#define FIXED_HPP
 #include <iostream>
 class Fixed
 {
@@ -20,3 +33,4 @@ class Fixed
 	int getRawBits(void) const;
 	void setRawBits(const int raw);
 };
+#endif
