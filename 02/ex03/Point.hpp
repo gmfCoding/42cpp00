@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:59:40 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/02 18:59:44 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:21:33 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef POINT_HPP
@@ -28,6 +28,8 @@ class Point
 
 	Point& operator =(const Point& rhs);
 	Point operator -(const Point& rhs) const;
+	
+	friend std::ostream& operator <<(std::ostream& os, const Point& rhs);
 	
 	float Det(const Point other) const;
 
