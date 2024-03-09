@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:28:27 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/09 18:41:31 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/10 00:09:19 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string>
@@ -29,6 +29,9 @@ public:
     void attack(const std::string& target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
-    const std::string getName();
+    const std::string getName() const;
 
+    bool canAct() const;
+
+    bool checkAbility(const std::string origin) const;
 };
