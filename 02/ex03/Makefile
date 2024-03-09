@@ -15,7 +15,7 @@ TARGET_NAME := bsp
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp Fixed.cpp Point.cpp bsp.cppp )
+SRC := $(foreach x, $(SRC_PATH), main.cpp Fixed.cpp Point.cpp bsp.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # clean files list
