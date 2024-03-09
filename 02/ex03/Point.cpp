@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:59:48 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/02 19:23:05 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/09 17:03:15 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Point.hpp"
@@ -33,7 +33,7 @@ std::ostream& operator <<(std::ostream& os, const Point& rhs)
 Point& Point::operator=(const Point& rhs)
 {
     // Do nothing, const fixed x,y are impossible to assign with UB
-    (void)rhs;
+    (void)rhs;  
     return *this;
 }
 
@@ -46,5 +46,10 @@ Point::~Point() {}
 
 float Point::Det(const Point other) const
 {
-    return (other.x.toFloat() * this->x.toFloat() - other.y.toFloat() * this->y.toFloat());
+    return (other.y.toFloat() * this->x.toFloat() - other.x.toFloat() * this->y.toFloat());
+}
+
+float Point::Dot(const Point other) const
+{
+    return (other.x.toFloat() * this->x.toFloat() + other.y.toFloat() * this->y.toFloat());
 }
