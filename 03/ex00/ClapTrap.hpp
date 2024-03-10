@@ -6,10 +6,12 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:28:27 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/10 00:09:19 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/10 16:42:49 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string>
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
+# include <string>
 
 class ClapTrap
 {
@@ -35,3 +37,4 @@ public:
 
     bool checkAbility(const std::string origin) const;
 };
+#endif
