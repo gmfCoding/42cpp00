@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:36:04 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/10 18:41:12 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/10 19:06:44 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -110,8 +110,6 @@ bool ClapTrap::checkEnergy(const std::string origin) const
 
 bool ClapTrap::checkHealth(const std::string origin) const
 {
-    if (m_energy <= 0)
-        std::cout << getType() << " " << m_name << " has insufficient energy to " << origin << std::endl;
     if (m_health <= 0)
         std::cout << getType() << " " << m_name << " is too damaged to " << origin << std::endl;
     return (m_health > 0);
