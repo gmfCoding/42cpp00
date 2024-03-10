@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:44:03 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/10 18:43:42 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:46:32 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void ScavTrap::guardGate()
 {
-    if (!checkHealth("enter Gate keeper mode!"))
+    if (!checkHealthEnergy("enter Gate keeper mode!"))
         return ;
     std::cout << getType() << " " << m_name << " is now in Gate keeper mode!" << std::endl;
 }
