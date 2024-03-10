@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 17:28:27 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/10 18:10:17 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:40:57 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef CLAPTRAP_HPP
@@ -43,6 +43,8 @@ public:
 
     bool canAct() const;
 
-    bool checkAbility(const std::string origin) const;
+    bool checkHealthEnergy(const std::string origin) const;
+    bool checkEnergy(const std::string origin) const;
+    bool checkHealth(const std::string origin) const;
 };
 #endif

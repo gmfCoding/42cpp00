@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:36:04 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/10 18:10:26 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:41:12 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -56,7 +56,7 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(const std::string& target)
 {
-    if (!checkAbility("attack!"))
+    if (!checkHealthEnergy("attack!"))
         return ;
     m_energy--;
     std::cout << getType() << " " << m_name << " attacks "
@@ -73,7 +73,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (!checkAbility("be repaired!"))
+    if (!checkHealthEnergy("be repaired!"))
         return ;
     m_energy--;
     m_health += amount;
@@ -96,12 +96,23 @@ const std::string ClapTrap::getType() const
     return (m_type);
 }
 
+bool ClapTrap::checkHealthEnergy(const std::string origin) const
+{
+    return (checkEnergy(origin) && checkHealth(origin));
+}
 
-bool ClapTrap::checkAbility(const std::string origin) const
+bool ClapTrap::checkEnergy(const std::string origin) const
+{
+    if (m_energy <= 0)
+        std::cout << getType() << " " << m_name << " has insufficient energy to " << origin << std::endl;
+    return (m_energy > 0);
+}
+
+bool ClapTrap::checkHealth(const std::string origin) const
 {
     if (m_energy <= 0)
         std::cout << getType() << " " << m_name << " has insufficient energy to " << origin << std::endl;
     if (m_health <= 0)
         std::cout << getType() << " " << m_name << " is too damaged to " << origin << std::endl;
-    return (m_energy > 0 && m_health > 0);
+    return (m_health > 0);
 }

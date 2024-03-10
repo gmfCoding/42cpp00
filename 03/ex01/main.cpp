@@ -7,6 +7,7 @@ void scavTrapTest()
     ScavTrap rose("rose");
     ClapTrap mark("mark");
     
+
     mark.attack(rose.getName());
     for (size_t i = 0; i < 3; i++)
     {
@@ -15,6 +16,8 @@ void scavTrapTest()
     }
     mark.attack(rose.getName());
     mark.beRepaired(10);
+    rose.guardGate();
+    rose.takeDamage(100);
     rose.guardGate();
 }
 
