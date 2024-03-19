@@ -7,7 +7,7 @@ Cat::Cat()
 	this->brain = new Brain();
 }
 
-Cat::Cat(const Cat &copy) : Animal(copy)
+Cat::Cat(const Cat &copy) : AAnimal(copy)
 {
 	std::cout << "Copy Construct: Animal!" << std::endl;
 	operator=(copy);
@@ -15,7 +15,7 @@ Cat::Cat(const Cat &copy) : Animal(copy)
 
 Cat& Cat::operator=(const Cat& rhs)
 {
-	Animal::operator=(rhs);
+	AAnimal::operator=(rhs);
  	std::cout << "Copy Assignment: Cat!" << std::endl;
 	this->brain = new Brain(*rhs.brain);
     return *this;
