@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   World.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/25 02:07:07 by clovell           #+#    #+#             */
+/*   Updated: 2024/03/25 02:07:08 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+# ifndef WORLD_HPP
+# define WORLD_HPP
 #include "AMateria.hpp"
-
 class World
 {
 	static World world;
@@ -18,4 +30,4 @@ private:
 	World& operator=(const World& rhs);
 	void resize(void);
 };
-
+#endif
