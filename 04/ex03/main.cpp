@@ -38,8 +38,67 @@ void test_1()
 	delete src;
 }
 
+void test_2()
+{
+	std::cout << std::endl << bold_on << "[2] Secondary test" << bold_off << std::endl;
+	
+	ICharacter* me;
+
+	{
+		Character* me2 = new Character("me");
+		me = new Character(*me2);
+		delete me2;
+	}
+
+	IMateriaSource* src;
+	{
+		MateriaSource* src2 = new MateriaSource();
+		src = new MateriaSource(*src2);
+		delete src2;
+	}
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+
+	// Slot overwriting test
+	me->equip(src->createMateria("ice"));
+	me->equip(src->createMateria("ice"));
+	me->equip(src->createMateria("ice"));
+	me->equip(src->createMateria("cure"));
+	me->equip(src->createMateria("cure"));
+	me->equip(src->createMateria("ice"));
+	me->equip(src->createMateria("cure"));
+	me->equip(src->createMateria("cure"));
+	me->equip(src->createMateria("ice"));
+
+	ICharacter* bob = new Character("bob");
+
+	// available spells
+	me->use(0, *bob);
+	me->use(1, *bob);
+	me->use(2, *bob);
+	me->use(3, *bob);
+
+	// Out of rnage available spells
+	me->use(4, *bob);
+
+	// No available spells
+	bob->use(0, *me);
+	bob->use(1, *me);
+	bob->use(2, *me);
+	bob->use(3, *me);
+
+	// Out of range no available spells
+	bob->use(4, *me);
+	
+	delete bob;
+	delete me;
+	delete src;
+}
+
+
 int main()
 {
 	test_1();
+	test_2();
 	return 0;
 }

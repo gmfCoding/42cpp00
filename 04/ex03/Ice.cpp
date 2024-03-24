@@ -1,34 +1,37 @@
-#include "Ice.hpp"
 #include <iostream>
+#include "Ice.hpp"
+#include "debugstream.hpp"
 
 Ice::Ice() : AMateria("ice")
 {
-	std::cout << "Constructor: Ice!" << std::endl;
+	debugStream << "Constructor: Ice!" << std::endl;
 }
 
 Ice::Ice(const Ice &copy) : AMateria(copy.getType())
 {
-	std::cout << "Copy Construct: Ice!" << std::endl;
+	debugStream << "Copy Construct: Ice!" << std::endl;
 	operator=(copy);
 }
 
 Ice& Ice::operator=(const Ice& rhs)
 {
 	AMateria::operator=(rhs);
-	std::cout << "Copy Assignment: Ice!" << std::endl;
+	debugStream << "Copy Assignment: Ice!" << std::endl;
     return *this;
 }
 
 Ice::~Ice() {
-	std::cout << "Deconstructor: Ice!" << std::endl;
+	debugStream << "Deconstructor: Ice!" << std::endl;
 }
+
 
 AMateria* Ice::clone() const
 {
-
+	return (AMateria*)new Ice(*this);
 }
+
 
 void Ice::use(ICharacter& target)
 {
-
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

@@ -1,35 +1,36 @@
-#include "Cure.hpp"
 #include <iostream>
+#include "Cure.hpp"
+#include "debugstream.hpp"
 
 Cure::Cure() : AMateria("cure")
 {
-	std::cout << "Constructor: Cure!" << std::endl;
+	debugStream << "Constructor: Cure!" << std::endl;
 }
 
 Cure::Cure(const Cure &copy) : AMateria(copy.getType())
 {
-	std::cout << "Copy Construct: Cure!" << std::endl;
+	debugStream << "Copy Construct: Cure!" << std::endl;
 	operator=(copy);
 }
 
 Cure& Cure::operator=(const Cure& rhs)
 {
+	debugStream << "Copy Assignment: Cure!" << std::endl;
 	AMateria::operator=(rhs);
-	std::cout << "Copy Assignment: Cure!" << std::endl;
     return *this;
 }
 
 Cure::~Cure() {
-	std::cout << "Deconstructor: Cure!" << std::endl;
+	debugStream << "Deconstructor: Cure!" << std::endl;
 }
-
 
 AMateria* Cure::clone() const
 {
-
+	return (AMateria*)new Cure(*this);
 }
 
 void Cure::use(ICharacter& target)
 {
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 
 }

@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:15:19 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/20 01:54:32 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/25 01:24:11 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ class AMateria;
 class Character : public ICharacter
 {
 	AMateria* slots[4];
-	static const int len_slots = sizeof(slots) / sizeof(*slots);
+	static const int len = sizeof(slots) / sizeof(*slots);
 
 private:
 	std::string name;

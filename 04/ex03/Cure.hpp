@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:25:24 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/20 01:48:10 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/25 00:43:45 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CURE_HPP
 # include <string>
 # include "ICharacter.hpp"
+# include "AMateria.hpp"
 
 class Cure : public AMateria
 {
