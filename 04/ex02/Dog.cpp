@@ -6,7 +6,7 @@ Dog::Dog() : brain(new Brain())
 	type = "Dog";
 }
 
-Dog::Dog(const Dog &copy) : AAnimal(copy)
+Dog::Dog(const Dog &copy) : AAnimal(copy), brain(NULL)
 {
 	std::cout << "Copy Constructor: Dog!" << std::endl;
 	operator=(copy);

@@ -134,6 +134,25 @@ void test_8()
 	delete i;
 }
 
+void test_9()
+{
+	std::cout << std::endl << bold_on << "[9] Deep copy test" << bold_off << std::endl;
+	{
+		const Dog* original = new Dog();
+		const Dog* dog = new Dog(*original);
+		std::cout << bold_on << "Deep Copy:" << (dog->isDeepCopy(original) ? "True" : "False") << bold_off << std::endl;
+		delete original;
+		delete dog;
+	}
+	{
+		const Cat* original = new Cat();
+		const Cat* cat = new Cat(*original);
+		std::cout << bold_on << "Deep Copy:" << (cat->isDeepCopy(original) ? "True" : "False") << bold_off << std::endl;
+		delete original;
+		delete cat;
+	}
+}
+
 int main()
 {
 	test_1();
@@ -144,5 +163,6 @@ int main()
 	test_6();
 	test_7();
 	test_8();
+	test_9();
 	return 0;
 }
