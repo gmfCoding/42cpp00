@@ -15,7 +15,7 @@ TARGET_NAME := animal
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp Cat.cpp Dog.cpp Animal.cpp WrongCat.cpp WrongAnimal.cpp Brain.cpp)
+SRC := $(foreach x, $(SRC_PATH), main.cpp Cat.cpp Dog.cpp AAnimal.cpp WrongCat.cpp WrongAnimal.cpp Brain.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # clean files list

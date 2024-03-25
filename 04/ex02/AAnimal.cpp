@@ -1,4 +1,5 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
+
 AAnimal::AAnimal()
 {
 	std::cout << "Constructor: Animal!" << std::endl;
