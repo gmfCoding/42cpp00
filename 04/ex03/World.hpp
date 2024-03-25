@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   World.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
+/*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 02:07:07 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 02:07:08 by clovell          ###   ########.fr       */
+/*   Created: 2024/03/25 02:07:08 by clovell           #+#    #+#             */
+/*   Updated: 2024/03/25 20:28:20 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# ifndef WORLD_HPP
+#ifndef WORLD_HPP
 # define WORLD_HPP
 #include "AMateria.hpp"
+
 class World
 {
 	static World world;
@@ -20,6 +21,7 @@ class World
 	unsigned int			count;
 
 public:
+	World();
 	World(unsigned int capacity);
 	void	drop(AMateria* &mat);
 	static World&	get(void);

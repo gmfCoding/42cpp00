@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:25:24 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 01:03:30 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/25 20:25:42 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ class AMateria
 {
 protected:
 	std::string type;
+
+private:
+	AMateria();
 
 public:
 	AMateria(std::string const & type);
