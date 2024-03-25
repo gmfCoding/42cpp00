@@ -52,7 +52,6 @@ void test_3()
 		delete original;
 		delete cat;
 	}
-
 }
 
 int main()

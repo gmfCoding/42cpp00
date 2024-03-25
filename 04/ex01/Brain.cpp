@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Brain.hpp"
 
-//const int Brain::ideas_count;
-
 Brain::Brain()
 {
 	std::cout << "Constructor: Brain!" << std::endl;
@@ -10,7 +8,7 @@ Brain::Brain()
 
 Brain::Brain(const Brain &copy)
 {
-	std::cout << "Copy Construct: Brain!" << std::endl;
+	std::cout << "Copy Constructor: Brain!" << std::endl;
 	operator=(copy);
 }
 
