@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:45 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 02:06:45 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:47:01 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MATERIASOURCE_HPP
@@ -16,8 +16,6 @@
 class MateriaSource : public IMateriaSource
 {
 	static const int	len = 4;
-
-	int					next;
 	AMateria			*slots[len];
 
 public:

@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:06 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 02:06:07 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:51:07 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -25,13 +25,7 @@ Character::Character(const std::string& name) : name(name)
 Character::Character(const Character &copy)
 {
 	debugStream << "Copy Construct: Character!" << std::endl;
-	this->name = copy.getName();
-	for (size_t i = 0; i < len; i++)
-	{
-		slots[i] = NULL;
-		if (copy.slots[i] != NULL)
-			slots[i] = copy.slots[i]->clone();
-	}
+	operator=(copy);
 }
 
 Character& Character::operator=(const Character& rhs)
@@ -41,14 +35,14 @@ Character& Character::operator=(const Character& rhs)
 	for (size_t i = 0; i < len; i++)
 	{
 		slots[i] = NULL;
-		if (slots[i] != NULL)
-			delete slots[i];
+		if (rhs.slots[i] != NULL)
+			slots[i] = rhs.slots[i]->clone();
 	}
     return *this;
 }
 
 Character::~Character() {
-	debugStream << "Deconstructor: Character!" << std::endl;
+	debugStream << "Destructor: Character!" << std::endl;
 	for (size_t i = 0; i < len; i++)
 	{
 		if (slots[i] != NULL)

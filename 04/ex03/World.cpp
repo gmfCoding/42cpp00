@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:50 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:53 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:53:24 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "World.hpp"
@@ -18,13 +18,13 @@ World& World::get()
 	return World::world;
 }
 
-World::World() : capacity(8), count(0), dropped(new AMateria*[8])
+World::World() : dropped(new AMateria*[8]), capacity(8), count(0)
 {
 	for (size_t i = 0; i < capacity; i++)
 		dropped[i] = NULL;
 }
 
-World::World(unsigned int capacity) : capacity(capacity), count(0)
+World::World(unsigned int capacity) : dropped(NULL), capacity(capacity), count(0)
 {
 	if (capacity <= 0)
 		capacity = 1;

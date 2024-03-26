@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:42 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 20:29:40 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:51:40 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -14,17 +14,18 @@
 #include "AMateria.hpp"
 #include "debugstream.hpp"
 
-MateriaSource::MateriaSource() : next(0)
+MateriaSource::MateriaSource()
 {
 	for (size_t i = 0; i < len; i++)
 		slots[i] = NULL;
 	debugStream << "Constructor: MateriaSource!" << std::endl;
 }
 
-MateriaSource::MateriaSource(const MateriaSource &copy) : next(0)
+MateriaSource::MateriaSource(const MateriaSource &copy)
 {
 	debugStream << "Copy constructor: MateriaSource" << std::endl;
-
+	for (size_t i = 0; i < len; i++)
+		slots[i] = NULL;
 	operator=(copy);
 }
 
