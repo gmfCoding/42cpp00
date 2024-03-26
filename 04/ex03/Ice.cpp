@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:19 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 02:06:20 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:56:48 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -32,7 +32,7 @@ Ice& Ice::operator=(const Ice& rhs)
 }
 
 Ice::~Ice() {
-	debugStream << "Deconstructor: Ice!" << std::endl;
+	debugStream << "Destructor: Ice!" << std::endl;
 }
 
 

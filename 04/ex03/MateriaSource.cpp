@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:42 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/26 14:51:40 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:56:48 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -45,7 +45,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& rhs)
 }
 
 MateriaSource::~MateriaSource() {
-	debugStream << "Deconstructor: MateriaSource!" << std::endl;
+	debugStream << "Destructor: MateriaSource!" << std::endl;
 
 	for (size_t i = 0; i < len; i++)
 	{

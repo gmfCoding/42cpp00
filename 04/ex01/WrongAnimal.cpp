@@ -19,7 +19,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& rhs)
 }
 
 WrongAnimal::~WrongAnimal() {
-	std::cout << "Deconstructor: WrongAnimal!" << std::endl;
+	std::cout << "Destructor: WrongAnimal!" << std::endl;
 }
 
 void WrongAnimal::makeSound() const

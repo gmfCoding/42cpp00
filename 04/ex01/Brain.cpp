@@ -21,5 +21,5 @@ Brain& Brain::operator=(const Brain& rhs)
 }
 
 Brain::~Brain() {
-	std::cout << "Deconstructor: Brain!" << std::endl;
+	std::cout << "Destructor: Brain!" << std::endl;
 }

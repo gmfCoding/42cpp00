@@ -22,7 +22,7 @@ Cat& Cat::operator=(const Cat& rhs)
 }
 
 Cat::~Cat() {
-	std::cout << "Deconstructor: Cat!" << std::endl;
+	std::cout << "Destructor: Cat!" << std::endl;
 	delete this->brain;
 }
 

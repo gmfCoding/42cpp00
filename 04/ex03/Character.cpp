@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:06 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/26 14:51:07 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:56:02 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -25,6 +25,8 @@ Character::Character(const std::string& name) : name(name)
 Character::Character(const Character &copy)
 {
 	debugStream << "Copy Construct: Character!" << std::endl;
+	for (size_t i = 0; i < len; i++)
+		slots[i] = NULL;
 	operator=(copy);
 }
 

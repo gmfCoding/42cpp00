@@ -29,7 +29,7 @@ bool Dog::isDeepCopy(const Dog* other) const
 
 
 Dog::~Dog() {
-	std::cout << "Deconstructor: Dog!" << std::endl;
+	std::cout << "Destructor: Dog!" << std::endl;
 	delete this->brain;
 }
 

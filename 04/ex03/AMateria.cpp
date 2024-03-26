@@ -6,7 +6,7 @@
 /*   By: clovell <clovell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 02:06:00 by clovell           #+#    #+#             */
-/*   Updated: 2024/03/25 02:06:01 by clovell          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:56:48 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -32,7 +32,7 @@ AMateria& AMateria::operator=(const AMateria& rhs)
 }
 
 AMateria::~AMateria() {
-	debugStream << "Deconstructor: AMateria!" << std::endl;
+	debugStream << "Destructor: AMateria!" << std::endl;
 }
 
 const std::string& AMateria::getType() const

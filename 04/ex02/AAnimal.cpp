@@ -19,7 +19,7 @@ AAnimal& AAnimal::operator=(const AAnimal& rhs)
 }
 
 AAnimal::~AAnimal() {
-	std::cout << "Deconstructor: Animal!" << std::endl;
+	std::cout << "Destructor: Animal!" << std::endl;
 }
 
 void AAnimal::makeSound() const
