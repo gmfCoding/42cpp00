@@ -15,6 +15,7 @@ private:
     const int _execute;
 
 	AForm();
+	AForm& operator=(const AForm &rhs);
 
 public:
 	struct GradeTooHighException : public std::exception
@@ -23,6 +24,11 @@ public:
 	};
 
 	struct GradeTooLowException : public std::exception
+	{
+		const char * what () const throw();
+	};
+
+	struct FormNotSignedException : public std::exception
 	{
 		const char * what () const throw();
 	};
@@ -36,7 +42,6 @@ public:
 	
 	AForm(const std::string& name, int grade, int execution);
 	AForm(const AForm& copy);
-	AForm& operator=(const AForm &rhs);
 	~AForm();
 
     void beSigned(Bureaucrat& bureaucrat);

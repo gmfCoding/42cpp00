@@ -6,6 +6,11 @@ const char * AForm::GradeTooLowException::what () const throw()
 	return "Grade too low!";
 };
 
+const char * AForm::FormNotSignedException::what () const throw()
+{
+	return "Form not signed!";
+};
+
 const char * AForm::GradeTooHighException::what () const throw()
 {
 	return "Grade too high!";
@@ -28,8 +33,8 @@ AForm::AForm(const AForm& copy) : _name(copy._name), _grade(copy._grade), _signe
 
 AForm& AForm::operator=(const AForm &rhs)
 {
-    *this = AForm(rhs._name, rhs._grade, rhs._execute);
-    this->_signed = rhs._signed;
+	(void)rhs;
+	throw std::logic_error("Abstract class AForm not designed to have assignment operator");
     return (*this);
 }
 
@@ -60,7 +65,7 @@ bool AForm::getSigned() const
 
 std::ostream& operator<< (std::ostream &out, const AForm& b)
 {
-    out << "Aform: " << b.getName();
+    out << "form: " << b.getName();
     out << ", signature grade: " << b.getGrade();
     out << ", execution grade: " << b.getExecute();
     return out;
@@ -68,7 +73,7 @@ std::ostream& operator<< (std::ostream &out, const AForm& b)
 
 void AForm::beSigned(Bureaucrat& bureaucrat)
 {
-    if (bureaucrat.signAForm(*this) == false)
+    if (bureaucrat.signForm(*this) == false)
         throw AForm::GradeTooLowException();
     this->_signed = true;
 }

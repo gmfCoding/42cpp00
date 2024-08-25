@@ -83,10 +83,56 @@ void ex01_test_abstract_instance()
     // { std::cerr << e.what() << '\n'; }
 }
 
+#include "ShrubberyCreationForm.cpp"
+
 void ex01_tests()
 {
+	bool tests[100] = {false};
+	unsigned int testsc = 0;
+
 	ex01_test_abstract_instance();
-	
+	std::cout << "\aForm signing test.\n";
+
+	ShrubberyCreationForm form("pine.txt");
+	Bureaucrat bureaucrat("Minster of Forestry", ShrubberyCreationForm::exec);
+
+    std::cout << "\nTrying to execute unsigned form.\n";
+    try
+    {
+		form.execute(bureaucrat);
+		tests[testsc++] = false;
+    }
+    catch(const std::exception& e)
+    { 
+		tests[testsc++] = true;
+		std::cerr << e.what() << '\n';
+	}
+    
+    std::cout << "\nSigning form. \n";
+    try
+    {
+		form.beSigned(bureaucrat);
+        // Shouldn't throw..
+		form.execute(bureaucrat);
+		tests[testsc++] = true;
+    }
+    catch(const std::exception& e)
+    { 
+		std::cerr << e.what() << '\n';
+		tests[testsc++] = false;
+	}
+
+	bool any_failed = false;
+	for (size_t i = 0; i < testsc; i++)
+	{
+		if (tests[i] == false)
+		{
+			std::cout << "Test: " << i << ", failed to pass.\n";
+			any_failed = true;
+		}
+	}
+	if (any_failed == false)
+		std::cout << "All tests passed :)" << std::endl;
 }
 
 int main()

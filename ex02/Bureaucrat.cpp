@@ -68,9 +68,14 @@ bool Bureaucrat::signForm(AForm &form)
     }
 }
 
-bool Bureaucrat::canSign(AForm &form) const
+bool Bureaucrat::canSign(const AForm &form) const
 {
     return this->getGrade() <= form.getGrade();
+}
+
+bool Bureaucrat::canExecute(const AForm &form) const
+{
+    return this->getGrade() <= form.getExecute();
 }
 
 std::ostream& operator<< (std::ostream &out, const Bureaucrat& b)
