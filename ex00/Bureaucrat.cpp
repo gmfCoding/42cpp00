@@ -10,6 +10,11 @@ const char * Bureaucrat::GradeTooHighException::what () const throw()
 	return "Grade too high!";
 }
 
+Bureaucrat::Bureaucrat() : _name("Not allowed"), _grade(-1)
+{
+
+}
+
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade)
 {
     validateGrade();

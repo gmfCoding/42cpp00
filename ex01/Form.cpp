@@ -11,6 +11,11 @@ const char * Form::GradeTooHighException::what () const throw()
 	return "Grade too high!";
 }
 
+Form::Form() : _name("Not allowed"), _grade(-1), _signed(false), _execute(-1)
+{
+
+}
+
 Form::Form(const std::string& name, int grade, int execute) : _name(name), _grade(grade), _signed(false), _execute(execute)
 {
     validateGrade();
