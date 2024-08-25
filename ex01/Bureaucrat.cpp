@@ -73,7 +73,7 @@ bool Bureaucrat::signForm(Form &form)
     }
 }
 
-bool Bureaucrat::canSign(Form &form) const
+bool Bureaucrat::canSign(const Form &form) const
 {
     return this->getGrade() <= form.getGrade();
 }

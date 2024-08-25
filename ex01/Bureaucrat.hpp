@@ -27,7 +27,7 @@ public:
 
 	std::string getName() const;
 	int getGrade() const;
-	bool canSign(Form &form) const;
+	bool canSign(const Form &form) const;
 
 	void incrementGrade();
 	void decrementGrade();
