@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "Bureaucrat.hpp"
 #include "RobotomyRequestForm.hpp"
 
@@ -24,7 +25,27 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
-	(void)executor;
+	std::cout << executor << " executing: " << *this;
+
+	if (executor.canExecute(*this) == false)
+	{
+		std::cout << " -- [FAILED]" << std::endl;
+		throw AForm::GradeTooLowException();
+	}
+	if (getSigned() == false)
+	{
+		std::cout << " -- [FAILED]" << std::endl;
+		throw AForm::FormNotSignedException();
+	}
+
+	std::cout << " -- [SUCCESS]" << std::endl;
+
+	std::cout << ".,Bzz#rtt *Intense Drilling Noises* .,Bzz#rtt\n";
+
+	std::string outcome = "successfull, congratulations.";
+	if (std::rand() % 2 == 0)
+		outcome = "unsuccesfull, better luck next time.";
+	std::cout << "Hello " << getTarget() << " your robotomization has been " << outcome << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

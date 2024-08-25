@@ -1,27 +1,78 @@
 #include "Bureaucrat.hpp"
 
-void test(std::string name, int grade)
+
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.cpp"
+#include "RobotomyRequestForm.cpp"
+#include "PresidentialPardonForm.cpp"
+
+struct TestID
 {
+
+};
+
+const int MAX_TEST_COUNT = 100;
+
+bool tests[MAX_TEST_COUNT] = {false};
+unsigned int testsc = 0;
+
+void rslt_test(bool res)
+{
+	if (testsc >= sizeof(tests))
+	{
+		std::cerr << "Test error: MAX_TEST_COUNT reached" << std::endl;
+		tests[MAX_TEST_COUNT - 1] = false;
+	}
+	else
+		tests[testsc++] = res;
+}
+
+void fail_test()
+{
+	rslt_test(false);
+}
+
+void pass_test()
+{
+	rslt_test(true);
+}
+
+std::ostream& operator<<(std::ostream &out, const TestID& b)
+{
+	(void)b;
+    out << "\n[" << testsc << "]";
+    return out;
+}
+
+void ctor_test(std::string name, int grade, bool fail_expected)
+{
+	std::cout << TestID() << "Bureucrat Constructor Test: " << name << grade << std::endl;
     try
     {
         Bureaucrat bc(name, grade);
+		if (fail_expected)
+			fail_test();
     }
     catch(const std::exception& e)
     {
+		if (fail_expected)
+			pass_test();
+		else
+			fail_test();
         std::cerr << name << ": " << e.what() << '\n';
     }
 }
 
 void ex00_tests()
 {
-    test("Taylor", -1); 
-    test("George", 0); 
-    test("Gregg", 1);
-    test("James", 2); 
-    test("Micheal", 149); 
-    test("Rihanna", 150); 
-    test("Lucy", 151); 
-    test("Tim", 152);
+    ctor_test("Taylor", -1, true); 
+    ctor_test("George", 0, true); 
+    ctor_test("Gregg", 1, false);
+    ctor_test("James", 2, false); 
+    ctor_test("Micheal", 149, false); 
+    ctor_test("Rihanna", 150, false); 
+    ctor_test("Lucy", 151, false); 
+    ctor_test("Tim", 152, true);
     {
         try
         {
@@ -55,72 +106,118 @@ void ex00_tests()
     }
 }
 
-#include "AForm.hpp"
 
-void ex01_test_abstract_instance()
+void ex02_shrub()
 {
-	// std::cout << "\aForm signing test.\n";
-
-    // AForm form("Minimum Wage Increase", 50, 30);
-    // std::cout << "\nTrying an in-experienced bureucrat.\n";
-    // try
-    // {
-    //     Bureaucrat beginner("Michael", 100);
-    //     // Should throw Form::GradeToLowException
-    //     form.beSigned(beginner);
-    // }
-    // catch(const std::exception& e)
-    // { std::cerr << e.what() << '\n'; }
-    
-    // std::cout << "\nTrying an experienced bureucrat instead.\n";
-    // try
-    // {
-    //     Bureaucrat experienced("Michael", 20);
-    //     // Shouldn't throw..
-    //     form.beSigned(experienced);
-    // }
-    // catch(const std::exception& e)
-    // { std::cerr << e.what() << '\n'; }
-}
-
-#include "ShrubberyCreationForm.cpp"
-
-void ex01_tests()
-{
-	bool tests[100] = {false};
-	unsigned int testsc = 0;
-
-	ex01_test_abstract_instance();
-	std::cout << "\aForm signing test.\n";
-
 	ShrubberyCreationForm form("pine.txt");
 	Bureaucrat bureaucrat("Minster of Forestry", ShrubberyCreationForm::exec);
 
-    std::cout << "\nTrying to execute unsigned form.\n";
+    std::cout << TestID() << "\nTrying to execute unsigned form.\n";
     try
     {
 		form.execute(bureaucrat);
-		tests[testsc++] = false;
+		fail_test();
     }
     catch(const std::exception& e)
     { 
-		tests[testsc++] = true;
+		pass_test();
 		std::cerr << e.what() << '\n';
 	}
     
-    std::cout << "\nSigning form. \n";
+    std::cout << TestID() << "\nSigning form. \n";
     try
     {
 		form.beSigned(bureaucrat);
         // Shouldn't throw..
 		form.execute(bureaucrat);
-		tests[testsc++] = true;
+		pass_test();
     }
     catch(const std::exception& e)
     { 
 		std::cerr << e.what() << '\n';
-		tests[testsc++] = false;
+		fail_test();
 	}
+}
+
+void ex02_robot()
+{
+	RobotomyRequestForm form("Mr Brenford");
+	Bureaucrat bureaucrat("The head of the deptartment of the health and the saftey", RobotomyRequestForm::exec);
+
+    std::cout << TestID() << "\nTrying to execute unsigned form.\n";
+    try
+    {
+		form.execute(bureaucrat);
+		fail_test();
+    }
+    catch(const std::exception& e)
+    { 
+		pass_test();
+		std::cerr << e.what() << '\n';
+	}
+    
+    std::cout << TestID() << "\nSigning form. \n";
+    try
+    {
+		form.beSigned(bureaucrat);
+        // Shouldn't throw..
+		for (size_t i = 0; i < 20; i++)
+		{
+			form.execute(bureaucrat);
+		}
+		
+		pass_test();
+    }
+    catch(const std::exception& e)
+    { 
+		std::cerr << e.what() << '\n';
+		fail_test();
+	}
+}
+
+void ex02_pardon()
+{
+	PresidentialPardonForm form("Captain Gantu");
+	Bureaucrat bureaucrat("Zaphod Beeblebrox", PresidentialPardonForm::exec);
+
+    std::cout << TestID() << "\nTrying to execute unsigned form.\n";
+    try
+    {
+		form.execute(bureaucrat);
+		fail_test();
+    }
+    catch(const std::exception& e)
+    { 
+		pass_test();
+		std::cerr << e.what() << '\n';
+	}
+    
+    std::cout << TestID() << "\nSigning form. \n";
+    try
+    {
+		form.beSigned(bureaucrat);
+        // Shouldn't throw..
+		form.execute(bureaucrat);
+		pass_test();
+    }
+    catch(const std::exception& e)
+    { 
+		std::cerr << e.what() << '\n';
+		fail_test();
+	}
+}
+
+void ex02_tests()
+{
+	ex02_shrub();
+	ex02_robot();
+	ex02_pardon();
+}
+
+int main()
+{
+    //ex00_tests();    
+    ex02_tests();
 
 	bool any_failed = false;
 	for (size_t i = 0; i < testsc; i++)
@@ -133,10 +230,4 @@ void ex01_tests()
 	}
 	if (any_failed == false)
 		std::cout << "All tests passed :)" << std::endl;
-}
-
-int main()
-{
-    //ex00_tests();    
-    ex01_tests();
 }

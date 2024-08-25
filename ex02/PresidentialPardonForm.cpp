@@ -24,7 +24,22 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 void PresidentialPardonForm::execute(const Bureaucrat &executor) const
 {
-	(void)executor;
+	std::cout << executor << " executing: " << *this;
+
+	if (executor.canExecute(*this) == false)
+	{
+		std::cout << " -- [FAILED]" << std::endl;
+		throw AForm::GradeTooLowException();
+	}
+	if (getSigned() == false)
+	{
+		std::cout << " -- [FAILED]" << std::endl;
+		throw AForm::FormNotSignedException();
+	}
+
+	std::cout << " -- [SUCCESS]" << std::endl;
+
+	std::cout << "To: " << getTarget() << " you have been presidentially pardon by Zaphod Beeblebrox\n";
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
