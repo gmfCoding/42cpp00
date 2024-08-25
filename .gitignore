@@ -6,5 +6,4 @@ minishell
 *.swo
 .build/
 *.a
-ex00/
 **/bureau
