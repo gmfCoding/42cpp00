@@ -13,13 +13,13 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string target) : AForm
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& copy) : AForm("PresidentialPardonForm", PresidentialPardonForm::sign, PresidentialPardonForm::exec), _target(copy._target)
 {
-	
+
 }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs)
 {
 	*this = PresidentialPardonForm(rhs._target);
-    return (*this);
+	return (*this);
 }
 
 void PresidentialPardonForm::execute(const Bureaucrat &executor) const
@@ -55,8 +55,8 @@ std::string PresidentialPardonForm::getTarget() const
 std::ostream& operator<<(std::ostream &out, const PresidentialPardonForm& b)
 {
 	const AForm& form = b;
-    out << form;
+	out << form;
 	out << ", target: " << b.getTarget();
 
-    return out;
+	return out;
 }

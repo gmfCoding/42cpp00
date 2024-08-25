@@ -22,7 +22,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy) 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
 {
 	*this = ShrubberyCreationForm(rhs._target);
-    return (*this);
+	return (*this);
 }
 
 std::string ShrubberyCreationForm::getTarget() const
@@ -47,21 +47,21 @@ void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 
 	std::cout << " -- [SUCCESS]" << std::endl;
 
-	std::string data = 
+	std::string data =
 		 "         # #### ####            \n"
-         "       ### \\/#|### |/####       \n"
-         "      ##\\/#/ \\||/##/_/##/_#     \n"
-         "    ###  \\/###|/ \\/ # ###       \n"
-         "  ##_\\_#\\_\\## | #/###_/_####    \n"
-         " ## #### # \\ #| /  #### ##/##   \n"
-         "  __#_--###`  |{,###---###-~    \n"
-         "            \\ }{                \n"
-         "             }}{                \n"
-         "             }}{                \n"
-         "        ejm  {{}                \n"
-         "       , -=-~{ .-^- _           \n"
-         "             `}                 \n"
-         "              {               \n";
+		 "       ### \\/#|### |/####       \n"
+		 "      ##\\/#/ \\||/##/_/##/_#     \n"
+		 "    ###  \\/###|/ \\/ # ###       \n"
+		 "  ##_\\_#\\_\\## | #/###_/_####    \n"
+		 " ## #### # \\ #| /  #### ##/##   \n"
+		 "  __#_--###`  |{,###---###-~    \n"
+		 "            \\ }{                \n"
+		 "             }}{                \n"
+		 "             }}{                \n"
+		 "        ejm  {{}                \n"
+		 "       , -=-~{ .-^- _           \n"
+		 "             `}                 \n"
+		 "              {               \n";
 
 	std::ofstream outfile(getTarget().c_str());
 	outfile << data << std::endl;
@@ -76,8 +76,8 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 std::ostream& operator<<(std::ostream &out, const ShrubberyCreationForm& b)
 {
 	const AForm& form = b;
-    out << form;
+	out << form;
 	out << ", target: " << b.getTarget();
 
-    return out;
+	return out;
 }

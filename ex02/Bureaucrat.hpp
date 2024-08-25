@@ -10,7 +10,7 @@ class Bureaucrat
 {
 private:
 	const std::string _name;
-	int _grade;	
+	int _grade;
 
 	Bureaucrat();
 
@@ -35,7 +35,7 @@ public:
 	void validateGrade();
 
 	bool signForm(AForm& form);
-	
+
 	Bureaucrat(const std::string& name, int grade);
 	Bureaucrat(const Bureaucrat& copy);
 	Bureaucrat& operator=(const Bureaucrat &rhs);

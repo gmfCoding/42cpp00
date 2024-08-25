@@ -10,9 +10,9 @@ class AForm
 {
 private:
 	const std::string _name;
-	const int _grade;	
-    bool _signed;
-    const int _execute;
+	const int _grade;
+	bool _signed;
+	const int _execute;
 
 	AForm();
 	AForm& operator=(const AForm &rhs);
@@ -39,12 +39,12 @@ public:
 	int getExecute() const;
 
 	void validateGrade();
-	
+
 	AForm(const std::string& name, int grade, int execution);
 	AForm(const AForm& copy);
 	~AForm();
 
-    void beSigned(Bureaucrat& bureaucrat);
+	void beSigned(Bureaucrat& bureaucrat);
 	bool canSign(Bureaucrat& Bureaucrat);
 
 	virtual void execute(Bureaucrat const & executor) const = 0;
