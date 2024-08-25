@@ -7,3 +7,4 @@ minishell
 .build/
 *.a
 ex00/
+**/bureau
