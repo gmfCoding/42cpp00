@@ -46,12 +46,14 @@ std::ostream& operator<<(std::ostream &out, const TestID& b)
 
 void ctor_test(std::string name, int grade, bool fail_expected)
 {
-	std::cout << TestID() << "Bureucrat Constructor Test: " << name << grade << std::endl;
+	std::cout << TestID() << "\nBureucrat Constructor Test: " << name << grade << std::endl;
     try
     {
         Bureaucrat bc(name, grade);
 		if (fail_expected)
 			fail_test();
+		else
+			pass_test();
     }
     catch(const std::exception& e)
     {
@@ -73,36 +75,46 @@ void ex00_tests()
     ctor_test("Rihanna", 150, false); 
     ctor_test("Lucy", 151, false); 
     ctor_test("Tim", 152, true);
+
     {
+
+		std::cout << TestID() << "\nTrying to increment grade past allowed value.";
         try
         {
             Bureaucrat bc("Philip", 1);
             std::cout << bc << std::endl;
             bc.incrementGrade();
+			fail_test();
         }
         catch(const std::exception& e)
         {
             std::cerr << "incrementing grade past highest possible. " << e.what() << '\n';
+			pass_test();
         }
     }
     {
+		std::cout << TestID() << "\nTrying to decrement grade past allowed value.";
         try
         {
             Bureaucrat bc("Max", 151);
             std::cout << bc << std::endl;
             bc.decrementGrade();
+			fail_test();
         }
         catch(const std::exception& e)
         {
-            std::cerr << "derementing grade past lowest possible. " << e.what() << '\n';
+            std::cerr << "decrementing grade past lowest possible. " << e.what() << '\n';
+			pass_test();
         }
     }
     {
+		std::cout << TestID() << "\nTrying ostream operator<< and copy constructor.";
         Bureaucrat az("Lisa", 15);
         Bureaucrat bc(az);
         std::cout << bc << std::endl;
         std::cout << bc.getName() << ", ";
         std::cout << bc.getGrade() << std::endl;
+		pass_test();
     }
 }
 
@@ -216,7 +228,7 @@ void ex02_tests()
 
 int main()
 {
-    //ex00_tests();    
+    ex00_tests();    
     ex02_tests();
 
 	bool any_failed = false;

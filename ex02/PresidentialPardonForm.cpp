@@ -39,7 +39,7 @@ void PresidentialPardonForm::execute(const Bureaucrat &executor) const
 
 	std::cout << " -- [SUCCESS]" << std::endl;
 
-	std::cout << "To: " << getTarget() << " you have been presidentially pardon by Zaphod Beeblebrox\n";
+	std::cout << "To: " << getTarget() << ", you have been presidentially pardon by Zaphod Beeblebrox\n";
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
