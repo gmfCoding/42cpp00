@@ -8,7 +8,7 @@ class Bureaucrat
 {
 private:
 	const std::string _name;
-	int _grade;	
+	int _grade;
 
 	Bureaucrat();
 
@@ -29,7 +29,7 @@ public:
 	void incrementGrade();
 	void decrementGrade();
 	void validateGrade();
-	
+
 	Bureaucrat(const std::string& name, int grade);
 	Bureaucrat(const Bureaucrat& copy);
 	Bureaucrat& operator=(const Bureaucrat &rhs);

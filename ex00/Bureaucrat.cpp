@@ -17,18 +17,18 @@ Bureaucrat::Bureaucrat() : _name("Not allowed"), _grade(-1)
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade)
 {
-    validateGrade();
+	validateGrade();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy._grade)
 {
-    validateGrade();
+	validateGrade();
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &rhs)
 {
-    *this = Bureaucrat(rhs._name, rhs._grade);
-    return (*this);
+	*this = Bureaucrat(rhs._name, rhs._grade);
+	return (*this);
 }
 
 Bureaucrat::~Bureaucrat()
@@ -38,36 +38,36 @@ Bureaucrat::~Bureaucrat()
 
 std::string Bureaucrat::getName() const
 {
-   return _name;
+	return _name;
 }
 
 int Bureaucrat::getGrade() const
 {
-    return _grade;
+	return _grade;
 }
 
 void Bureaucrat::incrementGrade()
 {
-   _grade--;
-    validateGrade();
+	_grade--;
+	validateGrade();
 }
 
 void Bureaucrat::decrementGrade()
 {
-   _grade++; 
-    validateGrade();
+	_grade++;
+	validateGrade();
 }
 
 std::ostream& operator<< (std::ostream &out, const Bureaucrat& b)
 {
-    out << "name: " << b.getName() << ", grade: " << b.getGrade();
-    return out;
+	out << "name: " << b.getName() << ", grade: " << b.getGrade();
+	return out;
 }
 
 void Bureaucrat::validateGrade()
 {
-    if (_grade < 1)
-        throw Bureaucrat::GradeTooHighException();
-    if (_grade > 151)
-        throw Bureaucrat::GradeTooLowException();
+	if (_grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	if (_grade > 151)
+		throw Bureaucrat::GradeTooLowException();
 }
