@@ -28,7 +28,9 @@ Form::Form(const Form& copy) : _name(copy._name), _grade(copy._grade), _signed(c
 
 Form& Form::operator=(const Form &rhs)
 {
-	*this = Form(rhs._name, rhs._grade, rhs._execute);
+	if (this == &rhs)
+		return (*this);
+
 	this->_signed = rhs._signed;
 	return (*this);
 }
