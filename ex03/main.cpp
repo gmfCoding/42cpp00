@@ -239,7 +239,7 @@ void ex03_tests()
 	{
 		std::cout << TestID() << " " << names[i];
 		AForm* form = intern.makeForm(names[i], names[i]);
-		if (form == nullptr)
+		if (form == NULL)
 			fail_test();
 		else
 		{
@@ -257,6 +257,7 @@ int main()
 	ex00_tests();
 	ex02_tests();
 	ex03_tests();
+
 	bool any_failed = false;
 	for (size_t i = 0; i < testsc; i++)
 	{

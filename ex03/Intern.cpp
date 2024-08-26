@@ -74,5 +74,5 @@ AForm* Intern::makeForm(std::string name, std::string target)
 			return builders[i].generator(target);
 		}
 	}
-	return nullptr;
+	return NULL;
 }

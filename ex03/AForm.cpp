@@ -33,7 +33,7 @@ AForm::AForm(const AForm& copy) : _name(copy._name), _grade(copy._grade), _signe
 
 AForm& AForm::operator=(const AForm &rhs)
 {
-	(void)rhs;
+	static_cast<void>(rhs);
 	throw std::logic_error("Abstract class AForm not designed to have assignment operator");
 	return (*this);
 }
