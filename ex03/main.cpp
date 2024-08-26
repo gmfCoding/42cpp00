@@ -237,7 +237,7 @@ void ex03_tests()
 	Intern intern;
 	for (size_t i = 0; i < sizeof(names) / sizeof(std::string); i++)
 	{
-		std::cout << TestID() << " " << names[i];
+		std::cout << TestID() << " " << names[i] << std::endl;
 		AForm* form = intern.makeForm(names[i], names[i]);
 		if (form == NULL)
 			fail_test();
@@ -249,6 +249,15 @@ void ex03_tests()
 			pass_test();
 		}
 		std::cout << std::endl;
+	}
+
+	{
+		std::cout << TestID() << " -- standalone robotomy makeForm (from pdf) -- " << std::endl;
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		delete rrf;
+		pass_test();
 	}
 }
 

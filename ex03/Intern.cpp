@@ -71,8 +71,10 @@ AForm* Intern::makeForm(std::string name, std::string target)
 		{
 			if (name != builders[i].aliases[j])
 				continue;
+			std::cout << "Intern creates " << name << std::endl;
 			return builders[i].generator(target);
 		}
 	}
+	std::cout << "Intern cannot find form for: " << name << std::endl;
 	return NULL;
 }
