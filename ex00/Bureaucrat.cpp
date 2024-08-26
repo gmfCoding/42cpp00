@@ -27,7 +27,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy.
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &rhs)
 {
-	*this = Bureaucrat(rhs._name, rhs._grade);
+	this->_grade = rhs._grade;
 	return (*this);
 }
 
