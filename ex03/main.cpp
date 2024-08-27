@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 16:46:27 by clovell           #+#    #+#             */
+/*   Updated: 2024/08/27 17:10:02 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 
 
 #include "AForm.hpp"
-#include "ShrubberyCreationForm.cpp"
-#include "RobotomyRequestForm.cpp"
-#include "PresidentialPardonForm.cpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
 struct TestID
@@ -74,8 +86,8 @@ void ex00_tests()
 	ctor_test("James", 2, false);
 	ctor_test("Micheal", 149, false);
 	ctor_test("Rihanna", 150, false);
-	ctor_test("Lucy", 151, false);
-	ctor_test("Tim", 152, true);
+	ctor_test("Lucy", 150, false);
+	ctor_test("Tim", 151, true);
 
 	{
 
@@ -97,7 +109,7 @@ void ex00_tests()
 		std::cout << TestID() << "\nTrying to decrement grade past allowed value.";
 		try
 		{
-			Bureaucrat bc("Max", 151);
+			Bureaucrat bc("Max", 150);
 			std::cout << bc << std::endl;
 			bc.decrementGrade();
 			fail_test();
@@ -277,5 +289,8 @@ int main()
 		}
 	}
 	if (any_failed == false)
-		std::cout << "All tests passed :)" << std::endl;
+		std::cout << "\033[1;32m" << "All tests passed :)" << std::endl;
+	else
+		std::cout << "\033[1;31m" << "Failures! :(((" << std::endl;
+	std::cout << "\033[0m" << std::flush;
 }

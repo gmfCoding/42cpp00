@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 16:42:56 by clovell           #+#    #+#             */
+/*   Updated: 2024/08/27 16:42:59 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
@@ -82,6 +94,6 @@ void AForm::validateGrade()
 {
 	if (_grade < 1)
 		throw AForm::GradeTooHighException();
-	if (_grade > 151)
+	if (_grade > 150)
 		throw AForm::GradeTooLowException();
 }

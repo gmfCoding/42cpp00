@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 16:43:15 by clovell           #+#    #+#             */
+/*   Updated: 2024/08/27 16:43:18 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
@@ -90,6 +102,6 @@ void Bureaucrat::validateGrade()
 {
 	if (_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
-	if (_grade > 151)
+	if (_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
 }

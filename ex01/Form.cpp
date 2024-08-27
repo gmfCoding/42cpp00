@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 16:42:01 by clovell           #+#    #+#             */
+/*   Updated: 2024/08/27 16:42:05 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
@@ -79,6 +91,6 @@ void Form::validateGrade()
 {
 	if (_grade < 1)
 		throw Form::GradeTooHighException();
-	if (_grade > 151)
+	if (_grade > 150)
 		throw Form::GradeTooLowException();
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 16:39:12 by clovell           #+#    #+#             */
+/*   Updated: 2024/08/27 16:59:44 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 
 const char * Bureaucrat::GradeTooLowException::what () const throw()
@@ -70,6 +82,6 @@ void Bureaucrat::validateGrade()
 {
 	if (_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
-	if (_grade > 151)
+	if (_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
 }

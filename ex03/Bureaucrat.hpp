@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/27 16:45:57 by clovell           #+#    #+#             */
+/*   Updated: 2024/08/27 16:45:58 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 #include <string>
@@ -8,7 +20,7 @@ class AForm;
 
 class Bureaucrat
 {
-private:
+	private:
 	const std::string _name;
 	int _grade;
 
