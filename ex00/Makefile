@@ -15,7 +15,7 @@ TARGET_NAME := bureau
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp Bureaucrat.cpp Form.cpp)
+SRC := $(foreach x, $(SRC_PATH), main.cpp ScalarConverter.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # clean files list
