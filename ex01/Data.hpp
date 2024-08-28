@@ -1,11 +1,11 @@
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
+#ifndef DATA_HPP
+#define DATA_HPP
 #include <string>
 #include <ostream>
 
 class Data
 {
-private:
+public:
 	int m_number;
 	bool m_active;
 	float m_percent;	
@@ -19,5 +19,5 @@ public:
 	~Data();
 };
 
-std::ostream& operator<<(std::ostream& out, Data data);
+std::ostream& operator<< (std::ostream &out, const Data& b);
 #endif

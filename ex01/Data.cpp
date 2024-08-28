@@ -12,32 +12,33 @@ Data::Data(int number, bool active, float percent, char character, std::string t
 
 Data::Data(Data& copy)
 {
-	if (this != &copy)
-		return (*this);
 	this->operator=(copy);
-	return (*this);
 }
 
 Data& Data::operator=(Data& rhs)
 {
+	if (this != &rhs)
+		return (*this);
 	this->m_number = rhs.m_number;
 	this->m_active = rhs.m_active;
 	this->m_percent = rhs.m_percent;
 	this->m_character = rhs.m_character;
 	this->m_text = rhs.m_text;
+	return (*this);
 }
 
-std::ostream& Data::operator<<(std::ostream& out)
+std::ostream& operator<< (std::ostream& out, const Data& data)
 {
-	out << "Instance Address: " << this << std::endl;
-	out << "number:\t" << this->m_number << std::endl;
-	out << "active:\t" << this->m_active << std::endl;
-	out << "percent:\t" << this->m_percent << std::endl;
-	out << "character:\t" << this->m_character << std::endl;
-	out << "text:\t\t" << this->m_text << std::endl;
+	out << "Instance Address: " << &data << std::endl;
+	out << "number:\t" << data.m_number << std::endl;
+	out << "active:\t" << data.m_active << std::endl;
+	out << "percent:\t" << data.m_percent << std::endl;
+	out << "character:\t" << data.m_character << std::endl;
+	out << "text:\t\t" << data.m_text << std::endl;
+	return out;
 }
 
-~Data::Data()
+Data::~Data()
 {
 
 }

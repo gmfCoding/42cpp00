@@ -1,5 +1,7 @@
 #ifndef SERIALIZER_HPP
 #define SERIALIZER_HPP
+#include <stdint.h>
+#include "Data.hpp"
 
 class Serializer
 {
@@ -10,7 +12,7 @@ class Serializer
 		~Serializer();
 
 	public:
-		uintptr_t serialize(Data* ptr);
-		Data* deserailize(uintptr_t raw);
+		static uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
 };
 #endif

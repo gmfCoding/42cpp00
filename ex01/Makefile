@@ -10,7 +10,7 @@ OBJ_PATH := obj
 SRC_PATH := ./
 
 # compile macros
-TARGET_NAME := serialation
+TARGET_NAME := cereal
 
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 

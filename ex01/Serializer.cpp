@@ -5,16 +5,16 @@ Serializer::Serializer()
 
 Serializer::Serializer(Serializer& copy)
 {
-	if (this != &copy)
-		return (*this);
-	this->operator=(copy);
+	static_cast<void>(copy);
+}
+
+Serializer& Serializer::operator=(Serializer& rhs)
+{
+	static_cast<void>(rhs);
 	return (*this);
 }
 
-Serializer& Serialiser::operator=(Serializer& rhs)
-{ }
-
-~Serializer::Serializer()
+Serializer::~Serializer()
 { }
 
 uintptr_t Serializer::serialize(Data* ptr)
@@ -23,7 +23,7 @@ uintptr_t Serializer::serialize(Data* ptr)
 }
 
 
-Data* Serializer::deserailize(uintptr_t raw)
+Data* Serializer::deserialize(uintptr_t raw)
 {
 	return reinterpret_cast<Data*>(raw);
 }
