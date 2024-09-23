@@ -1,67 +1,8 @@
 #include "ScalarConverter.hpp"
+#include "DecimalConverter.hpp"
 #include <iostream>
-
-class AConverter
-{
-public:
-	virtual bool match(const std::string& literal) = 0;
-	virtual const std::string& getTypeName() = 0;
-	virtual const std::string& convert(const std::string& literal) = 0;
-};
-
-class DecimalConverter: public AConverter
-{
-private:
-	std::string m_name;
-	char m_prefix;
-	
-	DecimalConverter();
-		
-public:
-	DecimalConverter(const std::string& name, char prefix);
-	DecimalConverter(const DecimalConverter& copy);
-	DecimalConverter& operator=(const DecimalConverter& rhs);	
-	~DecimalConverter();
-	bool match(const std::string& literal);
-	const std::string& getTypeName();
-	const std::string& convert(const std::string& literal);
-};
-
-bool DecimalConverter::match(const std::string& literal)
-{
-	if (literal.empty())
-		return false;
-	
-	char* ptr;
-	strtof(literal.c_str(), &ptr);
-	return ptr[0] == '\0' || (ptr[0] == m_prefix && ptr[1] == '\0');
-}
-
-std::string DecimalConverter::match(const std::string& literal)
-{
-	if (literal.empty())
-		return false;
-	
-	char* ptr;
-	double value = strtord(literal.c_str(), &ptr);
-	std::string result;
-
-	if (!(ptr[0] == '\0' || (ptr[0] == m_prefix && ptr[1] == '\0')))
-		return "impossible";
-	if (value < 0.0)
-		result += "-";
-	if (isinf(value))
-		result += "inf";
-	if (isnan(value))
-		result += "nan";
-	else
-		result += m_prefix;
-}
-const std::string& DecimalConverter::getTypeName()
-{
-	return m_name;
-}
-
+#include <string>
+#include <sstream>
 
 ScalarConverter::ScalarConverter()
 {}
@@ -77,12 +18,17 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter& rhs)
 	return (*this);
 }
 
+static DecimalConverter g_floatConverter("float", 'f');
+static DecimalConverter g_doublConverter("double", '\0');
+static IntConverter g_intConverter();
+
 void ScalarConverter::convert(const std::string& literal)
 {
 	AConverter* converters[] =
 	{
-		new DecimalConverter("float", 'f'),
-		new DecimalConverter("double", '\0'),
+		&g_floatConverter,
+		&g_doublConverter,
+		&g_intConverter
 	};
 
 	for (size_t i = 0; i < sizeof(converters) / sizeof(*converters); i++)
