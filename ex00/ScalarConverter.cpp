@@ -6,7 +6,7 @@
 #include <iomanip>
 
 ScalarConverter::ScalarConverter()
-{}
+{ }
 
 ScalarConverter::ScalarConverter(ScalarConverter& copy)
 {
@@ -98,7 +98,9 @@ void ScalarConverter::convert(const std::string& literal)
 
 	if (ScalarConverter::isDouble(literal, result.doubleval.value))
 	{
+#ifdef PRINT_LITERAL_DETECTION
 		std::cout << "Double detected!\n";
+#endif
 		double d = result.doubleval.value;
 		if (isnan(d) || isinf(d))
 		{
@@ -114,7 +116,9 @@ void ScalarConverter::convert(const std::string& literal)
 	}
 	else if (ScalarConverter::isFloat(literal, result.floatval.value))
 	{
+#ifdef PRINT_LITERAL_DETECTION
 		std::cout << "Float detected!\n";
+#endif
 		float f = result.floatval.value;
 		if (isnan(f) || isinf(f))
 		{
@@ -130,7 +134,9 @@ void ScalarConverter::convert(const std::string& literal)
 	}
 	else if (ScalarConverter::isInt(literal, result.intval.value))
 	{
+#ifdef PRINT_LITERAL_DETECTION
 		std::cout << "Int detected!\n";
+#endif
 		int i = result.intval.value;
 		result.charval.value = static_cast<char>(i);
 		result.floatval.value = static_cast<float>(i);
@@ -138,7 +144,9 @@ void ScalarConverter::convert(const std::string& literal)
 	}
 	else if (ScalarConverter::isChar(literal, result.charval.value))
 	{
+#ifdef PRINT_LITERAL_DETECTION
 		std::cout << "Char detected!\n";
+#endif
 		char c = result.charval.value;
 		result.charval.value = static_cast<char>(c);
 		result.floatval.value = static_cast<float>(c);
