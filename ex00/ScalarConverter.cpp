@@ -51,18 +51,25 @@ bool ScalarConverter::isInt(const std::string& literal, int& value)
 
 bool ScalarConverter::isChar(const std::string& literal, char& value)
 {
+	char found = '\0';
 	if (literal.empty())
 		return false;
-	if (literal.length() == 1 && isprint(literal[0]))
+	if (literal.length() == 1)
 	{
-		value = literal[0];
+		found = literal[0];
 		return true;
 	}
-	if (literal[0] != '\'')
+	else if (literal.length() >= 3)
+	{
+		if (literal[0] != '\'' && literal[1] != '\'')
+			return false;
+		found = literal[1];
+	}
+	else if (literal.length() == 2)
 		return false;
-	if (!isprint(literal[1]))
+	if (!isprint(found))
 		return false;
-	value = literal[1];
+	value = found;
 	return true;
 }
 
