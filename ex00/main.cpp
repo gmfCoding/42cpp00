@@ -1,7 +1,12 @@
 #include "ScalarConverter.hpp"
 
-int main()
+int main(int argc, char** argv)
 {
-	ScalarConverter::convert("4.0f");
+	std::string str;
+	if (argc != 2)
+		str = "'a'";
+	else
+		str = argv[1];
+	ScalarConverter::convert(str);
 	return 0;
 }

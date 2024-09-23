@@ -1,6 +1,6 @@
 # tool macros
 CXX := c++
-CXXFLAGS := $(INC_PATH) -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
+CXXFLAGS := $(INC_PATH) -Wall -Werror -Wextra -std=c++98 $(DFLAGS) -g3 -fsanitize=address
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
@@ -10,12 +10,12 @@ OBJ_PATH := obj
 SRC_PATH := ./
 
 # compile macros
-TARGET_NAME := bureau
+TARGET_NAME := convert
 
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp ScalarConverter.cpp DecimalConverter.cpp)
+SRC := $(foreach x, $(SRC_PATH), main.cpp ScalarConverter.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # clean files list
