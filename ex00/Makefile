@@ -10,7 +10,7 @@ OBJ_PATH := obj
 SRC_PATH := ./
 
 # compile macros
-TARGET_NAME := bureau
+TARGET_NAME := template
 
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
