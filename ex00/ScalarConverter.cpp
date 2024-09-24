@@ -145,7 +145,7 @@ void ScalarConverter::convert(const std::string& literal)
 		std::cout << "Char detected!\n";
 #endif
 		char c = result.charval.value;
-		result.charval.value = static_cast<char>(c);
+		result.intval.value = static_cast<int>(c);
 		result.floatval.value = static_cast<float>(c);
 		result.doubleval.value = static_cast<double>(c);
 	}
