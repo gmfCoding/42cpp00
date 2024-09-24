@@ -41,7 +41,7 @@ void identify(Base* base)
 }
 
 template<class T>
-std::string get_type_name(Base& base, const std::string& name)
+std::string typename_fallback(Base& base, const std::string& name)
 {
 	try
 	{
@@ -59,11 +59,11 @@ void identify(Base& base)
 {
 	std::string name;
 
-	name = get_type_name<A>(base, "A");
+	name = typename_fallback<A>(base, "A");
 	if (name.empty())
-		name = get_type_name<B>(base, "B");
+		name = typename_fallback<B>(base, "B");
 	if (name.empty())
-		name = get_type_name<C>(base, "C");
+		name = typename_fallback<C>(base, "C");
 	if (name.empty())
 		name = "unknown type";
 
