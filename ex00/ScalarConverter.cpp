@@ -55,10 +55,7 @@ bool ScalarConverter::isChar(const std::string& literal, char& value)
 	if (literal.empty())
 		return false;
 	if (literal.length() == 1)
-	{
 		found = literal[0];
-		return true;
-	}
 	else if (literal.length() >= 3)
 	{
 		if (literal[0] != '\'' && literal[1] != '\'')
