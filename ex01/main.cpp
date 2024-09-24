@@ -9,7 +9,7 @@ int main()
 	Data* result = Serializer::deserialize(raw);
 	
 	if (data == result)
-		std::cout << "Congrats! The serialize -> deserialize result worked perfectly :(" << std::endl;
+		std::cout << "Congrats! The serialize -> deserialize result worked perfectly :)" << std::endl;
 	else
 		std::cout << "Uh ohhh! The serialize -> deserialize result was not the same :(" << std::endl;
 	delete data;

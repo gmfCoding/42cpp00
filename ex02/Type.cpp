@@ -1,8 +1,8 @@
-#include <cstdlib>
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <cstdlib>
 #include <iostream>
 
 typedef Base* (*baseGeneratorFn)(void);
@@ -31,11 +31,11 @@ Base* generate(void)
 
 void identify(Base* base)
 {
-	if (dynamic_cast<A*>(base))
+	if (dynamic_cast<A*>(base) != NULL)
 		std::cout << "A";
-	else if (dynamic_cast<B*>(base))
+	else if (dynamic_cast<B*>(base) != NULL)
 		std::cout << "B";
-	else if (dynamic_cast<C*>(base))
+	else if (dynamic_cast<C*>(base) != NULL)
 		std::cout << "C";
 	std::cout << std::endl;
 }
