@@ -1,6 +1,6 @@
 # tool macros
 CXX := c++
-CXXFLAGS := -MMD -I./ -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
+CXXFLAGS := -MMD -MP -I./ -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
@@ -43,7 +43,6 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c* $(Array.hpp)
 	-@printf "${GREEN}"
 	$(CXX) $(CCOBJFLAGS) -o $@ $<
 	-@printf "${NC}"
-
 
 
 # Dependencies

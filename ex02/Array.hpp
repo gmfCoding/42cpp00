@@ -40,7 +40,8 @@ public:
 
 	~Array()
 	{ 
-		delete[] m_array;
+		if (m_array != NULL)
+			delete[] m_array;
 	}
 	
 	T& operator[](int index)
