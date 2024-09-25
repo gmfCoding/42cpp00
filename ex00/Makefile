@@ -1,6 +1,6 @@
 # tool macros
 CXX := c++
-CXXFLAGS := $(INC_PATH) -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
+CXXFLAGS := -I./ -MMD -MP -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
 CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
@@ -17,6 +17,7 @@ TARGET := $(BIN_PATH)/$(TARGET_NAME)
 # src files & obj files
 SRC := $(foreach x, $(SRC_PATH), main.cpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
+DEPS = $(OBJ:.o=.d)
 
 # clean files list
 DISTCLEAN_LIST := $(OBJ)
@@ -40,6 +41,9 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
 	-@printf "${GREEN}"
 	$(CXX) $(CCOBJFLAGS) -o $@ $<
 	-@printf "${NC}"
+
+# Dependencies
+-include $(DEPS)
 
 # phony rules
 .PHONY: makedir

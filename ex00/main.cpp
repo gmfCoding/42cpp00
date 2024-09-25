@@ -18,3 +18,11 @@ int main( void ) {
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 	return 0;
 }
+
+#include <complex>
+
+void main2()
+{
+	std::complex<float> test;
+	test.
+}
