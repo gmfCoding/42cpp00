@@ -1,6 +1,7 @@
 #include "tarray.hpp"
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 struct Place
 {
@@ -18,7 +19,7 @@ std::string random_name()
 	result += chars[rand() % chars.length()];
 	if (rand() % 2 == 0)
 		result += chars[rand() % chars.length()];
-	for (size_t i = 0; i < (rand() % 2) + 1; i++)
+	for (int i = 0; i < (rand() % 2) + 1; i++)
 		result += vowels[rand() % vowels.length()];
 	result += chars[rand() % chars.length()];
 	return result;
