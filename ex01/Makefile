@@ -1,7 +1,5 @@
 # tool macros
 CXX := c++
-CXXFLAGS := $(INC_PATH) -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
-CCOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
 INC_PATH := ./
@@ -9,20 +7,27 @@ BIN_PATH := ./
 OBJ_PATH := obj
 SRC_PATH := ./
 
+CXXFLAGS := -I$(INC_PATH) -MMD -MP -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
+CCOBJFLAGS := $(CXXFLAGS) -c
+
 # compile macros
-TARGET_NAME := template
+TARGET_NAME := span
 
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp)
+SRC := $(foreach x, $(SRC_PATH), main.cpp Span.hpp)
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
+DEPS := $(OBJ:.o=.d)
 
 # clean files list
 DISTCLEAN_LIST := $(OBJ)
 
 CLEAN_LIST := $(TARGET) \
 			  $(DISTCLEAN_LIST)
+
+# include dependencies
+-include $(DEPS)
 
 .PHONY: all
 all: makedir $(TARGET)

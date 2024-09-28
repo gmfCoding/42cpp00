@@ -27,7 +27,11 @@ void test(int shortest, int longest, std::size_t amount, ...)
 	if (longest != longSpan)
 		std::cout << "Longest";
 	if (longest != longSpan || shortest != shortSpan)
+	{
 		std::cout << " TEST FAILED: ";
+		std::cout << shortSpan << ", " << longSpan;
+		std::cout << " EXPECTED: ";
+	}
 	else
 		std::cout << GREEN << "TEST PASSED: ";
    
@@ -37,6 +41,6 @@ void test(int shortest, int longest, std::size_t amount, ...)
 int main()
 {
 	test(10, 20, 3, 10, 20, 30);
-
+	test(2, 14, 5, 6, 3, 17, 9, 11);
 	return 0;
 }
