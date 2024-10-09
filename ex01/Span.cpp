@@ -1,5 +1,10 @@
 #include "Span.hpp"
 
+const char * Span::SpanException::what () const throw()
+{
+	return "Cannot find the span because it contains <= 1 elements";
+};
+
 Span::Span(unsigned int max) : m_used(0), m_max(max), m_container(new int[max])
 {
 
@@ -42,8 +47,9 @@ void Span::addNumber(int number)
 
 int Span::smallest(int& index, int skip)
 {
+	if (m_used <= 1)
+		throw Span::SpanException();
 	int min = std::numeric_limits<int>::max();
-
 	for (int i = 0; i < (long long)m_used; i++)
 	{
 		if (m_container[i] < min && i != skip)
@@ -57,6 +63,8 @@ int Span::smallest(int& index, int skip)
 
 int Span::largest()
 {
+	if (m_used <= 1)
+		throw Span::SpanException();
 	int max = std::numeric_limits<int>::min();
 
 	for (int i = 0; i < (long long)m_used; i++)
@@ -90,5 +98,10 @@ int Span::longestSpan()
 	int min = smallest(discard, -1);
 	int max = largest();
 	return max - min;
+}
+
+int Span::size()
+{
+	return m_used;
 }
 

@@ -3,8 +3,15 @@
 #include <cstddef>
 #include <algorithm>
 #include <limits>
+#include <string>
+
 class Span
 {
+public:
+	struct SpanException : public std::exception
+	{
+		const char * what () const throw();
+	};
 
 private:
 	std::size_t m_used;
@@ -24,6 +31,8 @@ public:
 	void addNumber(int number);
 	int shortestSpan();
 	int longestSpan();
+
+	int size();
 
 private:
 	int smallest(int& index, int skip);
