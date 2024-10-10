@@ -1,6 +1,7 @@
 #include "Span.hpp"
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 extern int n10000[10000];
 
@@ -78,20 +79,14 @@ void testn(std::size_t amount)
 	}
 }
 
-void testset()
+void testSpan(Span& span, const std::string& message)
 {
-	std::size_t amount = sizeof(n10000) / sizeof(int);
-	Span span(amount);
-	for (std::size_t i = 0; i < amount; i++)
-	{
-		span.addNumber(n10000[i]);
-	}
 	try
 	{
 		int shortSpan = span.shortestSpan();
 		int longSpan = span.longestSpan();
 		
-		std::cout << GREEN << "Testing Pre-defined Set:" << shortSpan << ", " << longSpan << std::endl;
+		std::cout << GREEN << message << shortSpan << ", " << longSpan << std::endl;
 	}
 	catch (std::exception e)
 	{
@@ -101,6 +96,32 @@ void testset()
 			std::cout << RED << "TEST FAILED: > 1 elements, Exception not expected";
 		std::cout << WHITE << std::endl;
 	}
+}
+
+void testset()
+{
+	std::size_t amount = sizeof(n10000) / sizeof(int);
+	Span span(amount);
+	for (std::size_t i = 0; i < amount; i++)
+	{
+		span.addNumber(n10000[i]);
+	}
+	testSpan(span, "Testing Pre-defined Set:");
+}
+
+
+void testiter()
+{
+	std::vector<int> vec;
+
+	for (std::size_t i = 0; i < 3500; i++)
+	{
+		vec.push_back(rand());
+	}
+
+	Span span(3500);
+	span.addNumbers(vec.begin(), vec.end());
+	testSpan(span, "Testing iterator: ");
 }
 
 
@@ -143,6 +164,7 @@ int main()
 		testn(std::pow(10, i));
 	}
 	testset();
+	testiter();
 	return 0;
 }
 

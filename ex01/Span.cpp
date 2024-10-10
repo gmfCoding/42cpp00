@@ -47,8 +47,9 @@ void Span::addNumber(int number)
 
 int Span::smallest(int& index, int skip)
 {
-	if (m_used <= 1)
+	if (m_used <= 0)
 		throw Span::SpanException();
+
 	int min = std::numeric_limits<int>::max();
 	for (int i = 0; i < (long long)m_used; i++)
 	{
@@ -63,7 +64,7 @@ int Span::smallest(int& index, int skip)
 
 int Span::largest()
 {
-	if (m_used <= 1)
+	if (m_used <= 0)
 		throw Span::SpanException();
 	int max = std::numeric_limits<int>::min();
 
@@ -79,6 +80,8 @@ int Span::largest()
 
 int Span::shortestSpan()
 {
+	if (m_used <= 1)
+		throw Span::SpanException();
 	int span = std::numeric_limits<int>::max();
 
 	for (std::size_t i = 0; i < m_used; i++)
@@ -94,7 +97,9 @@ int Span::shortestSpan()
 
 int Span::longestSpan()
 {
-	int discard;
+	if (m_used <= 1)
+		throw Span::SpanException();
+	int discard;	
 	int min = smallest(discard, -1);
 	int max = largest();
 	return max - min;

@@ -29,6 +29,14 @@ public:
 
 
 	void addNumber(int number);
+    
+	template <typename InputIterator>
+    void addNumbers(InputIterator begin, InputIterator end) {
+        for (InputIterator it = begin; it != end; ++it) {
+            addNumber(*it);
+        }
+    }
+	
 	int shortestSpan();
 	int longestSpan();
 

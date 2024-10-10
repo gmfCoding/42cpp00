@@ -11,6 +11,8 @@ DEPS := $(OBJS:.o=.d)
 
 CPPFLAGS := -I./ -MMD -MP
 
+CXXFLAGS:= -Wall -Wextra -Werror -std=c++98
+
 all: $(NAME)
 
 # The final build step.
