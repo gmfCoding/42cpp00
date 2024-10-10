@@ -1,75 +1,51 @@
-# tool macros
-CXX := c++
+NAME := span
 
-# path macros
-INC_PATH := ./
-BIN_PATH := ./
-OBJ_PATH := obj
-SRC_PATH := ./
+BUILD_DIR := obj
+SRC_DIRS := ./
 
-CXXFLAGS := -I$(INC_PATH) -MMD -MP -Wall -Werror -Wextra -std=c++98 $(DFLAGS) #-g3 -fsanitize=address
-CCOBJFLAGS := $(CXXFLAGS) -c
+SRCS := main.cpp Span.cpp
 
-# compile macros
-TARGET_NAME := span
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
-TARGET := $(BIN_PATH)/$(TARGET_NAME)
+DEPS := $(OBJS:.o=.d)
 
-# src files & obj files
-SRC := $(foreach x, $(SRC_PATH), main.cpp Span.hpp)
-OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
-DEPS := $(OBJ:.o=.d)
+CPPFLAGS := -I./ -MMD -MP
 
-# clean files list
-DISTCLEAN_LIST := $(OBJ)
+all: $(NAME)
 
-CLEAN_LIST := $(TARGET) \
-			  $(DISTCLEAN_LIST)
-
-# include dependencies
--include $(DEPS)
-
-.PHONY: all
-all: makedir $(TARGET)
-
-.PHONY: re
-re:	fclean all
-
-# non-phony targets
-$(TARGET): $(OBJ)
+# The final build step.
+$(NAME): $(OBJS)
 	-@printf "${BLUE}"
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
-	-@printf "${NC}"
+	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
+$(BUILD_DIR)/%.cpp.o: %.cpp
 	-@printf "${GREEN}"
-	$(CXX) $(CCOBJFLAGS) -o $@ $<
-	-@printf "${NC}"
+	@mkdir -p $(dir $@)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-# phony rules
-.PHONY: makedir
-makedir:
-	-@printf "${CYAN}"
-	@mkdir -p $(BIN_PATH) $(OBJ_PATH)
-	-@printf "${NC}"
+re: fclean all
 
-.PHONY: fclean
-fclean: clean
-	-@printf "${RED}"
-	rm -f $(TARGET_NAME)
-	-@printf "${NC}"
-
-.PHONY: clean
 clean:
 	-@printf "${YELLOW}"
-	rm -f $(DISTCLEAN_LIST)
-	-@printf "${NC}"
+	-rm -rf $(BUILD_DIR)
+
+fclean: clean
+	-@printf "${RED}"
+	-rm -f $(NAME)
+
+-include $(DEPS)
+
+.PHONY: all re fclean clean
 
 # COLORS
-export GREEN = \033[1;32m
+export BGREEN = \033[1;32m
+export GREEN = \033[0;32m
+export BRED = \033[1;31m
 export RED = \033[0;31m
-export BEIGE = \033[1;33m
+export BYELLOW = \033[1;33m
 export YELLOW = \033[0;33m
-export BLUE = \033[1;34m
-export CYAN = \033[1;36m
+export BBLUE = \033[1;34m
+export BLUE = \033[0;34m
+export BCYAN = \033[1;36m
+export CYAN = \033[0;36m
 export NC = \033[0m
