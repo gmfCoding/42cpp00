@@ -3,10 +3,27 @@
 #include <cstdlib>
 
 BitcoinExchange::BitcoinExchange() : prices()
-{ }
+{
+
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& exchange) : prices(exchange.prices)
+{
+
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& rhs)
+{
+	if (&rhs == this)
+		return *this;
+	this->prices = rhs.prices;
+	return *this;
+}
 
 BitcoinExchange::~BitcoinExchange()
-{ }
+{
+
+}
 
 BitcoinExchange::BitcoinExchange(std::istream& file) : prices()
 {
