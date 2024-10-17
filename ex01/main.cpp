@@ -1,16 +1,10 @@
-#include "BitcoinExchange.hpp"
-#include <fstream>
+#include "RPNParser.hpp"
+#include <iostream>
 
-int main()
+int main(int argc, char **argv)
 {
-	std::ifstream file;
-	file.open("data.csv");
-
-	BitcoinExchange exchange(file);
-	file.close();
-
-	file.open("input.txt");
-	exchange.Process(file);
-	file.close();
-	return 0;
+	if (argc > 1)
+		RPNParser parser(argv[1]);
+	else
+		std::cout << "Please provide an RPN input string." << std::endl;
 }
