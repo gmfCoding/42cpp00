@@ -2,7 +2,7 @@
 #define BTCDATE_HPP
 #include <string>
 
-typedef unsigned long long ulong64;
+typedef unsigned long ulong64;
 
 struct BTCDate
 {

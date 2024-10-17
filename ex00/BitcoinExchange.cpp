@@ -33,19 +33,40 @@ BitcoinExchange::BitcoinExchange(std::istream& file) : prices()
 	}
 	// for(mapiter i = prices.begin(); i != prices.end(); i++)
 	// {
-	// 	std::cout << "[\"" << (*i).first << "\"]" << ": " << (*i).second << std::endl;
+	// 	std::cout << "[\"" << (*i).first << "/" << (*i).second.datestr  << "\"]" << ": " << (*i).second.value << std::endl;
 	// }
 }
 
 ulong64 BitcoinExchange::DateTimeToInt(const std::string& date, ulong64& dateval)
 {
-	struct tm	time;
-
+	struct tm	time = {};
+	
 	char* res = strptime(date.c_str(), "%Y-%m-%d", &time);
 	dateval = (ulong64)mktime(&time);
 	return (res != NULL);
 }
 
+const char* ws = " \t\n\r\f\v";
+
+// trim from end of string (right)
+inline std::string& rtrim(std::string& s, const char* t = ws)
+{
+    s.erase(s.find_last_not_of(t) + 1);
+    return s;
+}
+
+// trim from beginning of string (left)
+inline std::string& ltrim(std::string& s, const char* t = ws)
+{
+    s.erase(0, s.find_first_not_of(t));
+    return s;
+}
+
+// trim from both ends of string (right then left)
+inline std::string& trim(std::string& s, const char* t = ws)
+{
+    return ltrim(rtrim(s, t), t);
+}
 
 void BitcoinExchange::Process(std::istream& file)
 {
@@ -73,9 +94,16 @@ void BitcoinExchange::Process(std::istream& file)
 			std::cout << "Error: bad input " << datestr << std::endl;
 			continue;
 		}
+		trim(datestr);
+		trim(pricestr);
 		price = atof(pricestr.c_str());
-		mapiter found = prices.lower_bound(date);
-		if (price < 0 || (*found).second.value < 0)
+		BitcoinExchange::mapiter iter = prices.lower_bound(date);
+		if (iter == prices.end())
+			continue;
+		if ((*iter).second.dateval > date && iter != prices.begin())
+			iter--;
+		BTCDate found = (*iter).second;
+		if (price < 0)
 		{
 			std:: cout << "Error: not a positive number" << std::endl;
 			continue;
@@ -87,7 +115,7 @@ void BitcoinExchange::Process(std::istream& file)
 		}
 		else
 		{
-			std::cout << (*found).second.datestr << " => " << price << " = " << price * (*found).second.value << std::endl;
+			std::cout << datestr << " => " << price << " = " << price * found.value << std::endl;
 		}
 	}
 }
