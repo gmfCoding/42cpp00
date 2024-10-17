@@ -1,16 +1,16 @@
-NAME := find
+NAME := btc
 
 BUILD_DIR := obj
 SRC_DIRS := ./
 
-SRCS := main.cpp
+SRCS := main.cpp BitcoinExchange.cpp BTCDate.cpp
 
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 DEPS := $(OBJS:.o=.d)
 
 CPPFLAGS := -I./ -MMD -MP
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 

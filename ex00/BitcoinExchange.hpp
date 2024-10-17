@@ -1,12 +1,15 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
+#include "BTCDate.hpp"
 #include <iostream>
 #include <map>
 
 class BitcoinExchange
 {
+
 private:
-	std::map<time_t, float> prices;
+	std::map<ulong64, BTCDate> prices;
+	typedef std::map<ulong64, BTCDate>::iterator mapiter;
 	BitcoinExchange();
 
 public:
@@ -14,28 +17,9 @@ public:
 	BitcoinExchange(const BitcoinExchange& copy);
 	BitcoinExchange& operator=(const BitcoinExchange& rhs);
 	virtual ~BitcoinExchange();
+
+	void Process(std::istream& file);
+
+	ulong64 DateTimeToInt(const std::string& date,  ulong64& dateval);
 };
 #endif
-
-
-BitcoinExchange::BitcoinExchange() : prices()
-{ }
-
-BitcoinExchange::~BitcoinExchange()
-{ }
-
-BitcoinExchange::BitcoinExchange(std::istream& file) : prices()
-{
-	std::string date;
-	char comma;
-	std::string price;
-	
-	while (true)
-	{
-		file >> date >> comma >> price;
-		if (file.fail() || file.eof())
-			break;
-		std::cout << date << ", " << price << std::endl;
-	}
-}
-
