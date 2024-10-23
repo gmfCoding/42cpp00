@@ -8,29 +8,46 @@ int g_comparisons_count = 0;
 struct Pair
 {
 public:
+
 	int a;
 	int b;
 
 	Pair()
 	{ }
 
-	Pair(int a, int b) : a(a), b(b)
+	Pair(int a, int b): a(a), b(b)
+	{ }
+	
+	Pair(int b): a(-1), b(b)
 	{ }
 
-	int Largest()
+	int RemoveB()
 	{
-		g_comparisons_count++;
-		if (a < b)
-			return b;
-		return a;
+		int tmp = b;
+		b = -1;
+		return tmp;
 	}
 
-	int Smallest()
+	int RemoveA()
 	{
-		g_comparisons_count++;
-		if (a < b)
-			return a;
-		return b;
+		int tmp = a;
+		a = -1;
+		return tmp;
+	}
+
+	void AddA(int val)
+	{
+		a = val;
+	}
+
+	void AddB(int val)
+	{
+		b = val;
+	}
+
+	void Swap()
+	{
+		std::swap(a, b);
 	}
 };
 
@@ -45,6 +62,7 @@ void printPairs(std::vector<Pair> pairs)
 	}
 	std::cout << std::endl;
 }
+#include <signal.h>
 
 void printChain(std::vector<int> arr)
 {
@@ -109,6 +127,33 @@ std::vector<Pair> mergeSort(std::vector<Pair>& pairs)
 }
 
 
+void sortFive(std::vector<Pair>& pairs, int val)
+{
+	g_comparisons_count++;
+	if (pairs.size() == 0)
+		pairs.insert(pairs.begin(), Pair(val));
+
+	else if (val < pairs[0].a)
+	{
+	g_comparisons_count++;
+
+		pairs.insert(pairs.begin(), Pair(val));
+		if (val > pairs[1].b)
+		{
+			pairs[0].Swap();
+			pairs[0].AddB(pairs[1].RemoveB());
+		}
+	}
+	else if (pairs.size() >= 2)
+	{
+	g_comparisons_count++;
+
+		if (val > pairs[1].a)
+			pairs.insert(pairs.begin() + 2, Pair(val));
+		else
+			pairs.insert(pairs.begin() + 1, Pair(val));
+	}
+}
 
 void sortHigh(std::vector<Pair>& pairs)
 {
@@ -123,7 +168,10 @@ void sortHigh(std::vector<Pair>& pairs)
 
 void initMainChain(std::vector<Pair>& pairs, std::vector<int>& chain)
 {
-	for (std::vector<Pair>::iterator it = pairs.begin(); it != pairs.end(); it++)
+	sortFive(pairs, pairs[2].RemoveB());
+	sortFive(pairs, pairs[1].RemoveB());
+
+	for (std::vector<Pair>::iterator it = pairs.begin() + 2; it != pairs.end(); it++)
 	{
 		chain.push_back(it->a);
 	}
@@ -165,19 +213,21 @@ void insertElement(int item, std::vector<int>& chain)
 }
 
 
+
 void insertMainChain(std::vector<Pair>& pairs, std::vector<int>& chain)
 {
 	// for (std::vector<Pair>::iterator it = pairs.begin(); it != pairs.end(); it++)
 	// {
 	// 	insertElement(it->b, chain);
 	// }
-
 	chain.insert(chain.begin(), pairs.begin()->b);
 	size_t i;
 	int loc, selected;
 	for (i = 1; i < pairs.size(); ++i)
 	{
 		selected = pairs[i].b;
+		if (selected < 0)
+			continue;
 		loc = binarySearch(chain, selected, 0, chain.size());
 		chain.insert(chain.begin() + loc, selected);
 	}
@@ -197,27 +247,44 @@ void insertMainChain(std::vector<Pair>& pairs, std::vector<int>& chain)
 //     }
 // }
 
-
+#define SETS 10
+#define ELEM 9
 int main()
 {
-	static const int arr[] = {6, 7, 8, 5, 3, 1, 2, 4, 9};
-	std::vector<int> numbers(arr, arr + sizeof(arr) / sizeof(arr[0]));
-	std::vector<Pair> pairs;
-	std::vector<int> chain;;
-	int last;
-	createPairs(numbers, pairs, last);
-	
-	printPairs(pairs);
-	sortHigh(pairs);
-	printPairs(pairs);
-	pairs = mergeSort(pairs);
-	printPairs(pairs);
-	initMainChain(pairs, chain);
-	printChain(chain);
-	insertMainChain(pairs, chain);
+	static const int sets[SETS][ELEM] = {{13, 17, 19, 6, 20, 18, 11, 8, 12}, 
+	{4, 10, 6, 12, 15, 14, 9, 7, 5}, 
+	{2, 16, 8, 10, 6, 18, 3, 1, 14}, 
+	{10, 2, 3, 12, 11, 5, 7, 6, 13}, 
+	{13, 11, 18, 14, 7, 5, 19, 1, 16}, 
+	{13, 14, 9, 2, 7, 5, 16, 3, 12}, 
+	{4, 17, 14, 16, 1, 5, 2, 13, 9}, 
+	{4, 19, 13, 20, 12, 6, 18, 8, 11}, 
+	{5, 8, 16, 3, 11, 13, 10, 17, 19}, 
+	{7, 19, 6, 10, 18, 5, 15, 1, 20}};
 
-	if (numbers.size() % 2 != 0)
-		insertElement(*(numbers.end() - 1), chain);
-	printChain(chain);
-	std::cout << "Comparisons: " << g_comparisons_count << std::endl;
+	for (unsigned int i = 0; i < SETS; i++)
+	{
+		const int* arr = &sets[i][0];
+		std::vector<int> numbers(arr, arr + ELEM);
+		std::vector<Pair> pairs;
+		std::vector<int> chain;;
+		int last;
+		createPairs(numbers, pairs, last);
+		
+		printPairs(pairs);
+		sortHigh(pairs);
+		printPairs(pairs);
+		pairs = mergeSort(pairs);
+		printPairs(pairs);
+		initMainChain(pairs, chain);
+		printPairs(pairs);
+		printChain(chain);
+		insertMainChain(pairs, chain);
+
+		if (numbers.size() % 2 != 0)
+			insertElement(*(numbers.end() - 1), chain);
+		printChain(chain);
+		std::cout << "Comparisons: " << g_comparisons_count << std::endl;
+		g_comparisons_count = 0;
+	}
 }
