@@ -3,7 +3,7 @@ NAME := PmergeMe
 BUILD_DIR := obj
 SRC_DIRS := ./
 
-SRCS := main.cpp
+SRCS := main.cpp Pair.cpp PmergeMe.cpp
 
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
