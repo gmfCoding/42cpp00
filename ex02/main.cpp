@@ -4,7 +4,6 @@
 
 int g_comparisons_count = 0;
 
-
 struct Pair
 {
 public:
@@ -168,10 +167,7 @@ void sortHigh(std::vector<Pair>& pairs)
 
 void initMainChain(std::vector<Pair>& pairs, std::vector<int>& chain)
 {
-	sortFive(pairs, pairs[2].RemoveB());
-	sortFive(pairs, pairs[1].RemoveB());
-
-	for (std::vector<Pair>::iterator it = pairs.begin() + 2; it != pairs.end(); it++)
+	for (std::vector<Pair>::iterator it = pairs.begin(); it != pairs.end(); it++)
 	{
 		chain.push_back(it->a);
 	}
@@ -267,7 +263,7 @@ int main()
 		const int* arr = &sets[i][0];
 		std::vector<int> numbers(arr, arr + ELEM);
 		std::vector<Pair> pairs;
-		std::vector<int> chain;;
+		std::vector<int> chain;
 		int last;
 		createPairs(numbers, pairs, last);
 		
