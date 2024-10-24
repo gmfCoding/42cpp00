@@ -1,9 +1,30 @@
 #include <iostream>
 #include <vector>
+#include <list>
 #include <algorithm>
 #include "Pair.hpp"
+#include "PmergeMe.hpp"
+#include <sstream>
 
 int g_comparisons_count = 0;
+
+void printPairs(std::list<Pair> pairs)
+{
+	for (std::list<Pair>::iterator it = pairs.begin(); it != pairs.end(); it++)
+	{
+		std::cout << "(" << it->a << ", " << it->b << ")" << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+void printChain(std::list<int> arr)
+{
+	for (std::list<int>::iterator it = arr.begin(); it != arr.end(); it++)
+	{
+		std::cout << *it << ", ";
+	}
+	std::cout << std::endl;
+}
 
 void printPairs(std::vector<Pair> pairs)
 {
@@ -13,7 +34,6 @@ void printPairs(std::vector<Pair> pairs)
 	}
 	std::cout << std::endl;
 }
-#include <signal.h>
 
 void printChain(std::vector<int> arr)
 {
@@ -22,6 +42,63 @@ void printChain(std::vector<int> arr)
 		std::cout << arr[i] << ", ";
 	}
 	std::cout << std::endl;
+}
+
+template <typename T>
+void benchmark(T& t, int size, const std::string& container_name)
+{
+	int comparisons;
+	std::clock_t start = std::clock();
+	typename T::IntContainer con = t.Sort(comparisons);
+	std::clock_t end = std::clock();
+	double elapsed = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000000.0);
+
+	std::cout << "After: ";
+	for (typename T::IntContainer::iterator it = con.begin(); it != con.end(); it++)
+		std::cout << *it << ' ';
+	std::cout << std::endl;
+	std::cout << "Time to process a range of " << size << " elements with" << container_name << " : " << elapsed << " us" << std::endl;
+	std::cout << std::endl;
+
+}
+
+int main(int argc, char *argv[])
+{
+	std::vector<int> vec;
+	std::list<int> list;
+
+	try
+	{
+		for (int i = 1; i < argc; i++)
+		{
+			int number;
+			std::stringstream readstring(argv[i]);
+			bool state = !(readstring >> number);
+			if (state)
+				throw "";
+			if (number < 0)
+				throw ": Negative number !";
+			vec.push_back(number);
+			list.push_back(number);
+
+
+		}
+
+		PmergeMe<std::vector> first(vec);
+		PmergeMe<std::list> second(list);
+
+		std::cout << "Before: ";
+		for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
+			std::cout << *it << ' ';
+		std::cout << std::endl;
+		benchmark(first, argc - 1, "std::vector");
+		benchmark(second, argc - 1, "std::list");
+	}
+    catch (const char *errorMsg)
+    {
+        std::cout << "Error " << errorMsg << std::endl;
+    }
+	return 0;
 }
 
 // void createPairs(std::vector<int>& numbers, std::vector<Pair>& pairs, int& last)
@@ -194,31 +271,32 @@ void printChain(std::vector<int> arr)
 // //         chain.insert(chain.begin() + loc, selected);
 // //     }
 // // }
-#include "PmergeMe.hpp"
-#define SETS 10
-#define ELEM 9
-int main()
-{
-	static const int sets[SETS][ELEM] = {{13, 17, 19, 6, 20, 18, 11, 8, 12}, 
-	{4, 10, 6, 12, 15, 14, 9, 7, 5}, 
-	{2, 16, 8, 10, 6, 18, 3, 1, 14}, 
-	{10, 2, 3, 12, 11, 5, 7, 6, 13}, 
-	{13, 11, 18, 14, 7, 5, 19, 1, 16}, 
-	{13, 14, 9, 2, 7, 5, 16, 3, 12}, 
-	{4, 17, 14, 16, 1, 5, 2, 13, 9}, 
-	{4, 19, 13, 20, 12, 6, 18, 8, 11}, 
-	{5, 8, 16, 3, 11, 13, 10, 17, 19}, 
-	{7, 19, 6, 10, 18, 5, 15, 1, 20}};
-
-	for (unsigned int i = 0; i < SETS; i++)
-	{
-		const int* arr = &sets[i][0];
-		std::vector<int> numbers(arr, arr + ELEM);
-		PmergeMe merge(numbers);
-		int comparisons = 0;
-		std::vector<int> sorted = merge.Sort(comparisons);
-		printChain(sorted);
-		std::cout << "Comparisons: " << comparisons << std::endl;
-		g_comparisons_count = 0;
-	}
-}
+// #include "PmergeMe.hpp"
+// #define SETS 10
+// #define ELEM 9
+// int main(int argc, char **argv)
+// {
+// 	static const int sets[SETS][ELEM] = {{13, 17, 19, 6, 20, 18, 11, 8, 12}, 
+// 	{4, 10, 6, 12, 15, 14, 9, 7, 5}, 
+// 	{2, 16, 8, 10, 6, 18, 3, 1, 14}, 
+// 	{10, 2, 3, 12, 11, 5, 7, 6, 13}, 
+// 	{13, 11, 18, 14, 7, 5, 19, 1, 16}, 
+// 	{13, 14, 9, 2, 7, 5, 16, 3, 12}, 
+// 	{4, 17, 14, 16, 1, 5, 2, 13, 9}, 
+// 	{4, 19, 13, 20, 12, 6, 18, 8, 11}, 
+// 	{5, 8, 16, 3, 11, 13, 10, 17, 19}, 
+// 	{7, 19, 6, 10, 18, 5, 15, 1, 20}};
+// 	(void)argv;
+// 	(void)argc;
+// 	for (unsigned int i = 0; i < SETS; i++)
+// 	{
+// 		const int* arr = &sets[i][0];
+// 		std::vector<int> numbers(arr, arr + ELEM);
+// 		PmergeMe merge(numbers);
+// 		int comparisons = 0;
+// 		std::vector<int> sorted = merge.Sort(comparisons);
+// 		printChain(sorted);
+// 		std::cout << "Comparisons: " << comparisons << std::endl;
+// 		g_comparisons_count = 0;
+// 	}
+// }
