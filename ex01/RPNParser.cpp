@@ -48,7 +48,7 @@ RPNParser::RPNParser(const std::string& input)
 			tokens.push(Token(buffer, value));
 		}
 	}
-	std::queue<Token> literals;
+	std::stack<Token> literals;
 	for (;tokens.size() != 0;)
 	{
 		Token token = tokens.front();
@@ -63,9 +63,9 @@ RPNParser::RPNParser(const std::string& input)
 		}
 		else
 		{
-			Token lhs = literals.front();
+			Token rhs = literals.top();
 			literals.pop();
-			Token rhs = literals.front();
+			Token lhs = literals.top();
 			literals.pop();
 			switch (token.u.operation)
 			{
@@ -92,7 +92,7 @@ RPNParser::RPNParser(const std::string& input)
 	if (tokens.size() >= 1)
 		std::cerr << "Error: missing literal" << std::endl;
 
-	std::cout << literals.front().u.value << std::endl;
+	std::cout << literals.top().u.value << std::endl;
 }
 
 RPNParser::RPNParser(const RPNParser& copy)

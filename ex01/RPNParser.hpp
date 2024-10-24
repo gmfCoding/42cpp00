@@ -1,6 +1,7 @@
 #ifndef RPNPARSER_HPP
 #define RPNPARSER_HPP
 #include <queue>
+#include <stack>
 #include <string>
 #include "Token.hpp"
 
