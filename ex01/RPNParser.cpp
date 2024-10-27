@@ -39,7 +39,13 @@ RPNParser::RPNParser(const std::string& input)
 				wasOp = false;
 				break;
 			}
-			if (wasOp == false)
+			if (!wasOp && !isdigit(op))
+			{
+				std::stringstream ss;
+				ss << "unknown operator or value: " << op;
+				throw std::runtime_error(ss.str());
+			}
+			if (!wasOp)
 				tokens.push(Token(buffer, op - '0'));
 		}
 		else
@@ -79,6 +85,8 @@ RPNParser::RPNParser(const std::string& input)
 				literals.push(Token(lhs.string + token.string + rhs.string, lhs.u.value - rhs.u.value));
 				break;
 			case DIV:
+				if (rhs.u.value == 0)
+					throw std::runtime_error("Divide by zero not allowed.");
 				literals.push(Token(lhs.string + token.string + rhs.string, lhs.u.value / rhs.u.value));
 				break;
 			default:
@@ -106,7 +114,6 @@ RPNParser& RPNParser::operator=(const RPNParser& rhs)
 	// Check for self-assignment
 	if (this == &rhs)
 		return *this;
-
 	return *this;
 }
 
