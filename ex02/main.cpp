@@ -64,6 +64,12 @@ void benchmark(T& t, int size, const std::string& container_name)
 
 int main(int argc, char *argv[])
 {
+	if (argc <= 2)
+	{
+		std::cout << "Please provide at least 2 arguments" << std::endl;
+		return 1;
+	}
+
 	std::vector<int> vec;
 	std::list<int> list;
 
@@ -75,13 +81,11 @@ int main(int argc, char *argv[])
 			std::stringstream readstring(argv[i]);
 			bool state = !(readstring >> number);
 			if (state)
-				throw "";
+				throw ": Not a number";
 			if (number < 0)
 				throw ": Negative number !";
 			vec.push_back(number);
 			list.push_back(number);
-
-
 		}
 
 		PmergeMe<std::vector> first(vec);
@@ -96,7 +100,7 @@ int main(int argc, char *argv[])
 	}
     catch (const char *errorMsg)
     {
-        std::cout << "Error " << errorMsg << std::endl;
+        std::cout << "Error: " << errorMsg << std::endl;
     }
 	return 0;
 }
