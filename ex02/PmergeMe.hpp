@@ -247,10 +247,6 @@ private:
 				i += segment_size - 1; // Move the index forward by segment size
 			}
 		}
-
-		if (chain.size() != 8) {
-			std::cerr << "Unexpected chain size: " << chain.size() << std::endl;
-		}
 	}
 };
 
