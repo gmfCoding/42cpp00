@@ -40,34 +40,30 @@ void printChain(std::vector<int> arr)
 {
 	for (std::size_t i = 0; i < arr.size(); i++)
 	{
-		std::cout << arr[i] << ", ";
+		std::cout << arr[i] << " ";
 	}
 	std::cout << std::endl;
 }
+#include <unistd.h>
 
 template <typename T>
-void benchmark(T& t, int size, const std::string& container_name)
+typename T::IntContainer benchmark(T& t, double &elapsed)
 {
 	int comparisons;
 	std::clock_t start = std::clock();
 	typename T::IntContainer con = t.Sort(comparisons);
-	if (!std::is_sorted(con.cbegin(), con.cend()))
-	{
-		for (typename T::IntContainer::iterator it = con.begin(); it != con.end(); it++)
-			std::cout << *it << ' ';
-		std::cerr << "ERROR NOT SORTED" << std::endl;
-		exit(1);
-	}
+	// if (!std::is_sorted(con.cbegin(), con.cend()))
+	// {
+	// 	for (typename T::IntContainer::iterator it = con.begin(); it != con.end(); it++)
+	// 		std::cout << *it << ' ';
+	// 	std::cerr << "ERROR NOT SORTED" << std::endl;
+	// 	exit(1);
+	// }
 	std::clock_t end = std::clock();
-	double elapsed = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000000.0);
+	elapsed = static_cast<double>(end - start) / (CLOCKS_PER_SEC / 1000000.0);
 
-	std::cout << "After: ";
-	for (typename T::IntContainer::iterator it = con.begin(); it != con.end(); it++)
-		std::cout << *it << ' ';
-	std::cout << std::endl;
-	std::cout << "Time to process a range of " << size << " elements with" << container_name << " : " << elapsed << " us" << std::endl;
-	std::cout << comparisons << std::endl;
-
+	//std::cout << comparisons << std::endl;
+	return con;
 }
 
 int main(int argc, char *argv[])
@@ -103,8 +99,18 @@ int main(int argc, char *argv[])
 		for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it++)
 			std::cout << *it << ' ';
 		std::cout << std::endl;
-		benchmark(first, argc - 1, "std::vector");
-		benchmark(second, argc - 1, "std::list");
+
+		double vecElapsed = 0;
+		double listElapsed = 0;
+
+		std::vector<int> chain = benchmark(first, vecElapsed);
+		benchmark(second, listElapsed);
+
+
+		std::cout << "After: ";
+		printChain(chain);
+		std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " << vecElapsed << " us" << std::endl;
+		std::cout << "Time to process a range of " << vec.size() << " elements with std::list : " << listElapsed << " us" << std::endl;
 
 	}
     catch (const char *errorMsg)

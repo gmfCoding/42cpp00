@@ -9,10 +9,10 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 DEPS := $(OBJS:.o=.d)
 
-CXXLDFLAGS = -fsanitize=address -fno-sanitize=leak
+CXXLDFLAGS = #-fsanitize=address -fno-sanitize=leak
 LDFLAGS = $(CXXLDFLAGS)
 CPPFLAGS := -I./ -MMD -MP
-CXXFLAGS := -Wall -Wextra -Werror -std=c++23 -g -pedantic $(CXXLDFLAGS)
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g -O3 -pedantic $(CXXLDFLAGS)
 
 all: $(NAME)
 
