@@ -41,16 +41,20 @@ RPNParser::RPNParser(const std::string& input)
 			}
 			if (!wasOp && !isdigit(op))
 			{
-				std::stringstream ss;
-				ss << "unknown operator or value: " << op;
-				throw std::runtime_error(ss.str());
+				throw std::runtime_error("Error");
 			}
 			if (!wasOp)
 				tokens.push(Token(buffer, op - '0'));
 		}
 		else
 		{
-			int value = atoi(buffer.c_str());
+			if (std::isdigit(buffer[0]) == false)
+				throw std::runtime_error("Error");
+			char* p;
+			long value = strtol(buffer.c_str(), &p, 10);
+			if (*p) {
+				throw std::runtime_error("Error");
+			}
 			tokens.push(Token(buffer, value));
 		}
 	}
@@ -64,8 +68,7 @@ RPNParser::RPNParser(const std::string& input)
 			literals.push(token);
 		else if (literals.size() <= 1)
 		{
-			std::cerr << "Error" << std::endl;
-			return; 
+			throw std::runtime_error("Error");
 		}
 		else
 		{
@@ -96,9 +99,9 @@ RPNParser::RPNParser(const std::string& input)
 		}
 	}
 	if (literals.size() >= 2)
-		std::cerr << "Error: missing operator" << std::endl;
+		throw std::runtime_error("Error: missing operator");
 	if (tokens.size() >= 1)
-		std::cerr << "Error: missing literal" << std::endl;
+		throw std::runtime_error("Error: missing operator");
 
 	std::cout << literals.top().u.value << std::endl;
 }
